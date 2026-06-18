@@ -98,3 +98,26 @@ push and pull request.
 - Design tokens are the single source of truth for styling
   (`packages/design-tokens`), injected as CSS variables on web and consumed as
   values on mobile.
+
+## 9. Web auth (Phase 1)
+
+`apps/web` uses Supabase Auth via `@supabase/ssr` (cookie-based sessions):
+
+- `src/lib/supabase/client.ts` (browser), `server.ts` (server components /
+  actions / route handlers), `middleware.ts` (`updateSession`).
+- `proxy.ts` (Next 16 proxy convention) refreshes the session and guards
+  `/home`, `/onboarding`, `/account`.
+- Flows: email+password sign-in/sign-up, magic link, sign-out (`app/login`),
+  PKCE callback (`app/auth/callback`) and token-hash confirm (`app/auth/confirm`).
+- Onboarding (`app/onboarding`) creates the profile + preferences and records
+  consent (AI processing **off** by default). Privacy centre
+  (`app/account/privacy`) toggles consent (granular, revocable).
+
+**Supabase dashboard config required for auth to work:**
+
+1. Authentication → URL Configuration → set **Site URL** (e.g.
+   `http://localhost:3000`) and add **Redirect URLs**:
+   `http://localhost:3000/auth/callback`, `http://localhost:3000/auth/confirm`
+   (and the production equivalents).
+2. `apps/web/.env.local` must contain `NEXT_PUBLIC_SUPABASE_URL` and
+   `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (publishable key only).

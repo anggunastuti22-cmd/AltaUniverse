@@ -15,6 +15,7 @@
     "@alta/design-tokens": "workspace:*",
     "@alta/ui": "workspace:*",
     "@alta/validation": "workspace:*",
+    "@supabase/ssr": "^0.12.0",
     "next": "16.2.9",
     "react": "19.2.3",
     "react-dom": "19.2.3",

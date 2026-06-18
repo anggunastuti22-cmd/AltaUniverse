@@ -1,4 +1,4 @@
-import { Button } from '@alta/ui';
+import Link from 'next/link';
 import { color, space } from '@alta/design-tokens';
 
 const domains = [
@@ -33,7 +33,19 @@ export default function HomePage() {
       </ul>
 
       <div style={{ marginTop: space.xl }}>
-        <Button>Get started</Button>
+        <Link
+          href="/login"
+          style={{
+            display: 'inline-block',
+            padding: `${space.sm}px ${space.lg}px`,
+            borderRadius: 8,
+            backgroundColor: color.primary,
+            color: color.primaryContrast,
+            textDecoration: 'none',
+          }}
+        >
+          Get started
+        </Link>
       </div>
     </main>
   );
