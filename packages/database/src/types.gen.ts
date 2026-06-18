@@ -246,6 +246,10 @@ export interface Database {
           notes: string | null;
           created_at: string;
           updated_at: string;
+          brand: string | null;
+          function: "cleanse" | "treat" | "moisturise" | "protect" | null;
+          cadence: string | null;
+          est_uses: number | null;
         };
         Insert: {
           id?: string;
@@ -258,6 +262,10 @@ export interface Database {
           notes?: string | null;
           created_at?: string;
           updated_at?: string;
+          brand?: string | null;
+          function?: "cleanse" | "treat" | "moisturise" | "protect" | null;
+          cadence?: string | null;
+          est_uses?: number | null;
         };
         Update: {
           id?: string;
@@ -270,6 +278,10 @@ export interface Database {
           notes?: string | null;
           created_at?: string;
           updated_at?: string;
+          brand?: string | null;
+          function?: "cleanse" | "treat" | "moisturise" | "protect" | null;
+          cadence?: string | null;
+          est_uses?: number | null;
         };
         Relationships: [];
       };
@@ -927,6 +939,7 @@ export interface Database {
       measurement_units: "metric" | "imperial";
       notification_type: "routine_reminder" | "weekly_review" | "system";
       primary_need: "rest" | "space" | "connection" | "focus" | "movement" | "comfort" | "direction";
+      product_function: "cleanse" | "treat" | "moisturise" | "protect";
       routine_time: "am" | "pm";
       skin_type: "dry" | "oily" | "combination" | "normal" | "sensitive";
       storage_bucket: "avatars" | "wardrobe-images" | "skin-images" | "content-assets";
