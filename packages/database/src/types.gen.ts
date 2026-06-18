@@ -322,6 +322,9 @@ export interface Database {
           note: string | null;
           created_at: string;
           updated_at: string;
+          focus: number | null;
+          mental_load: number | null;
+          primary_need: "rest" | "space" | "connection" | "focus" | "movement" | "comfort" | "direction" | null;
         };
         Insert: {
           id?: string;
@@ -332,6 +335,9 @@ export interface Database {
           note?: string | null;
           created_at?: string;
           updated_at?: string;
+          focus?: number | null;
+          mental_load?: number | null;
+          primary_need?: "rest" | "space" | "connection" | "focus" | "movement" | "comfort" | "direction" | null;
         };
         Update: {
           id?: string;
@@ -342,6 +348,9 @@ export interface Database {
           note?: string | null;
           created_at?: string;
           updated_at?: string;
+          focus?: number | null;
+          mental_load?: number | null;
+          primary_need?: "rest" | "space" | "connection" | "focus" | "movement" | "comfort" | "direction" | null;
         };
         Relationships: [];
       };
@@ -917,6 +926,7 @@ export interface Database {
       goal_status: "active" | "paused" | "achieved" | "dropped";
       measurement_units: "metric" | "imperial";
       notification_type: "routine_reminder" | "weekly_review" | "system";
+      primary_need: "rest" | "space" | "connection" | "focus" | "movement" | "comfort" | "direction";
       routine_time: "am" | "pm";
       skin_type: "dry" | "oily" | "combination" | "normal" | "sensitive";
       storage_bucket: "avatars" | "wardrobe-images" | "skin-images" | "content-assets";
