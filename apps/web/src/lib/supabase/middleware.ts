@@ -3,7 +3,15 @@ import { NextResponse, type NextRequest } from 'next/server';
 import type { Database } from '@alta/database';
 import { env } from '@/env';
 
-const PROTECTED_PREFIXES = ['/home', '/onboarding', '/account'];
+const PROTECTED_PREFIXES = [
+  '/home',
+  '/onboarding',
+  '/account',
+  '/mind',
+  '/wear',
+  '/lab',
+  '/notifications',
+];
 
 /**
  * Refreshes the auth session on every request and guards protected routes.

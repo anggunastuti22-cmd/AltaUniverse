@@ -13,6 +13,7 @@
     "@alta/config": "workspace:*",
     "@alta/database": "workspace:*",
     "@alta/design-tokens": "workspace:*",
+    "@alta/domain": "workspace:*",
     "@alta/ui": "workspace:*",
     "@alta/validation": "workspace:*",
     "@supabase/ssr": "^0.12.0",

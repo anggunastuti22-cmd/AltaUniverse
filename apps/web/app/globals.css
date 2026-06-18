@@ -22,6 +22,21 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Editorial: strategic moments in a transitional serif. */
+h1,
+h2,
+h3 {
+  font-family: var(--alta-font-family-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: var(--alta-line-height-tight);
+  color: var(--alta-color-textStrong);
+}
+
+::selection {
+  background: rgba(139, 123, 184, 0.26);
+}
+
 /* Accessible, keyboard-only focus indication. */
 :focus-visible {
   outline: 2px solid var(--alta-color-focusRing);

@@ -130,6 +130,9 @@ importers:
       '@alta/design-tokens':
         specifier: workspace:*
         version: link:../../packages/design-tokens
+      '@alta/domain':
+        specifier: workspace:*
+        version: link:../../packages/domain
       '@alta/ui':
         specifier: workspace:*
         version: link:../../packages/ui

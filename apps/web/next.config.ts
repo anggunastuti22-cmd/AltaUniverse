@@ -6,6 +6,7 @@ const config: NextConfig = {
     '@alta/ui',
     '@alta/design-tokens',
     '@alta/database',
+    '@alta/domain',
     '@alta/validation',
     '@alta/config',
   ],

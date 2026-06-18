@@ -4,8 +4,9 @@ import { buildThemeCss, buildThemeVars, cssVar, themeCss } from './css';
 
 describe('design tokens', () => {
   it('defines light-theme semantic colors and domain accents', () => {
-    expect(color.background).toBe('#ffffff');
+    expect(color.background).toBe('#f4f0e8');
     expect(color.text).toBeDefined();
+    expect(color.core).toBeDefined();
     expect(color.mind).toBeDefined();
     expect(color.wear).toBeDefined();
     expect(color.lab).toBeDefined();
@@ -22,7 +23,7 @@ describe('design tokens', () => {
   it('appends units to numeric scales', () => {
     const vars = buildThemeVars();
     expect(vars['--alta-space-md']).toBe(`${space.md}px`);
-    expect(vars['--alta-duration-base']).toBe('200ms');
+    expect(vars['--alta-duration-base']).toBe('180ms');
   });
 
   it('builds a :root block and var() references', () => {
