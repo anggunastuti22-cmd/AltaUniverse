@@ -18,6 +18,7 @@ export default tseslint.config(
       '**/*.tsbuildinfo',
       '**/.expo/**',
       'apps/mobile/assets/**',
+      '**/*.gen.ts',
     ],
   },
   js.configs.recommended,

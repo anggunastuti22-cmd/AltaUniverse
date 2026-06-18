@@ -47,6 +47,22 @@ jobs:
         env:
           SKIP_ENV_VALIDATION: '1'
 
+  database:
+    name: Database migrations + RLS tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install PostgreSQL 16 + pgTAP
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-16 postgresql-16-pgtap
+
+      - name: Run database tests (migrations + RLS/storage/deletion)
+        run: bash supabase/tests/run-local.sh
+        env:
+          PG_BIN: /usr/lib/postgresql/16/bin
+
   secret-scan:
     name: Secret scan
     runs-on: ubuntu-latest

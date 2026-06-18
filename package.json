@@ -25,6 +25,8 @@
     "db:stop": "supabase stop",
     "db:reset": "supabase db reset",
     "db:types": "supabase gen types typescript --local > packages/database/src/types.gen.ts",
+    "db:types:local": "node scripts/generate-db-types.mjs > packages/database/src/types.gen.ts",
+    "db:test:local": "bash supabase/tests/run-local.sh",
     "clean": "git clean -xdf node_modules .turbo **/.next **/.turbo **/node_modules"
   },
   "pnpm": {
