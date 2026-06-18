@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main, 'claude/**']
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Lint, typecheck, test, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+        env:
+          SKIP_ENV_VALIDATION: '1'
+
+  secret-scan:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure no tracked .env files (only *.example allowed)
+        run: |
+          tracked=$(git ls-files | grep -E '(^|/)\.env(\.|$)' | grep -vE '\.env\.example$' || true)
+          if [ -n "$tracked" ]; then
+            echo "::error::Tracked .env file(s) detected:"; echo "$tracked"; exit 1
+          fi
+
+      - name: Scan for secret-like material (JWTs / private keys)
+        run: |
+          if git grep -nIE '(eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{10,})|(-----BEGIN [A-Z ]*PRIVATE KEY-----)' -- . ':!pnpm-lock.yaml'; then
+            echo "::error::Potential secret (JWT/private key) detected in source"; exit 1
+          fi
+          echo "No secret-like material found."

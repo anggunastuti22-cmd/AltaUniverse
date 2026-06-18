@@ -1,0 +1,29 @@
+{
+  "name": "@alta/admin",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "build": "next build",
+    "start": "next start --port 3001",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@alta/config": "workspace:*",
+    "@alta/database": "workspace:*",
+    "@alta/design-tokens": "workspace:*",
+    "@alta/ui": "workspace:*",
+    "@alta/validation": "workspace:*",
+    "next": "16.2.9",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  }
+}

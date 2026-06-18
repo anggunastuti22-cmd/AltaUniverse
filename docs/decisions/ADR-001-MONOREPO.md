@@ -38,17 +38,20 @@ is one-way (apps → packages; packages never import apps; `domain` stays I/O-fr
 ## Consequences
 
 **Positive**
+
 - One source of truth for types, domain rules, validation, and design tokens.
 - Atomic changes across backend contract + all consumers in a single PR.
 - Consistent tooling (TS strict, lint, test) and cached builds via Turborepo.
 - Easier enforcement of architectural rules (import boundaries, no secrets).
 
 **Negative / costs**
+
 - More upfront tooling setup (workspace, task pipeline, CI caching).
 - CI must be smart about affected-package builds to stay fast.
 - Requires discipline on dependency boundaries to avoid a "big ball of mud."
 
 **Mitigations**
+
 - Enforce import boundaries and no-cycles in CI.
 - Keep `domain` pure and well-tested as the architectural anchor.
 

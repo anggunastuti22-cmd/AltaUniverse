@@ -9,13 +9,13 @@ to private user content.**
 
 ## 1. Surfaces at a glance
 
-| | Web (public) | Web (app) | Mobile | Admin |
-| --- | --- | --- | --- | --- |
-| Audience | Anyone | Authenticated users | Authenticated users | Operators |
-| Auth | None | User session | User session | Operator session |
-| Private data access | None | Own data (RLS) | Own data (RLS) | **None (by default)** |
-| Primary job | Inform | Manage & reflect | Capture | Operate platform |
-| Deploy target | `apps/web` | `apps/web` | `apps/mobile` | `apps/admin` (separate) |
+|                     | Web (public) | Web (app)           | Mobile              | Admin                   |
+| ------------------- | ------------ | ------------------- | ------------------- | ----------------------- |
+| Audience            | Anyone       | Authenticated users | Authenticated users | Operators               |
+| Auth                | None         | User session        | User session        | Operator session        |
+| Private data access | None         | Own data (RLS)      | Own data (RLS)      | **None (by default)**   |
+| Primary job         | Inform       | Manage & reflect    | Capture             | Operate platform        |
+| Deploy target       | `apps/web`   | `apps/web`          | `apps/mobile`       | `apps/admin` (separate) |
 
 ## 2. Web — public site
 
@@ -44,6 +44,7 @@ to private user content.**
 ## 5. Admin — and its hard limits
 
 ### Admin CAN:
+
 - Manage public content and educational articles.
 - Manage the product catalogue and affiliate catalogue (read-only outbound
   links).
@@ -52,6 +53,7 @@ to private user content.**
 - Use support tools operating on **metadata and user-shared context only**.
 
 ### Admin CANNOT (structurally, not by policy alone):
+
 - ❌ Read any user's journal, check-ins, decisions, or goals.
 - ❌ Read any user's skin baseline, observations, or experiments.
 - ❌ Read any user's wardrobe items, outfits, wear logs, wishlist, or images.
@@ -60,6 +62,7 @@ to private user content.**
   user-authorized escalation (deferred; not in MVP).
 
 ### How the limit is enforced:
+
 1. **Separate application** (`apps/admin`) with its own operator auth and roles.
 2. **Least-privilege DB role** for admin: granted only on public/operational
    tables and anonymized reporting views. Private tables are simply not in its

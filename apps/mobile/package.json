@@ -1,0 +1,28 @@
+{
+  "name": "@alta/mobile",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@alta/config": "workspace:*",
+    "@alta/database": "workspace:*",
+    "@alta/design-tokens": "workspace:*",
+    "@alta/ui": "workspace:*",
+    "@alta/validation": "workspace:*",
+    "expo": "~56.0.12",
+    "expo-status-bar": "~56.0.4",
+    "react": "19.2.3",
+    "react-native": "0.85.3",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.17",
+    "typescript": "5.9.3"
+  }
+}

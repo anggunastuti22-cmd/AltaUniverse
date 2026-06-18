@@ -28,11 +28,12 @@ room.
 **Owns:** the most sensitive free-text data in the product.
 
 **Out / never:**
+
 - Not a productivity/task manager (no kanban, no project management).
 - Not a clinical mental-health tool (no diagnosis, no risk scoring).
 - The decision room frames decisions; it never makes them.
 
-**Shared interfaces:** may *reference* (read, with consent) cross-domain signals
+**Shared interfaces:** may _reference_ (read, with consent) cross-domain signals
 for reflection (e.g., routine adherence) — but stores its own private text in
 its own tables.
 
@@ -44,6 +45,7 @@ usage log, cost-per-wear, wishlist.
 **Owns:** wardrobe items, outfits, wear logs, wishlist.
 
 **Out / never:**
+
 - Not a store; no checkout, cart, or payment.
 - Not a fashion social network; no public feeds or comparison.
 - Wishlist is a reflection tool, not a buy button.
@@ -59,6 +61,7 @@ journal, routine cost.
 **Owns:** products, routines, observations, experiments, skin baseline.
 
 **Out / never:**
+
 - Not diagnostic or medical. No condition detection, no treatment advice.
 - Not a review platform; observations are private to the user.
 - "Baseline" and "observation" are self-reported, never clinical findings.
@@ -80,16 +83,16 @@ advice.
 
 ## 6. Ownership & data classification summary
 
-| Data | Domain | Classification |
-| --- | --- | --- |
-| Profile, preferences, consent | Core | Private (personal, low-sensitivity) |
-| Journal, check-ins, decisions, goals | AltaMind | Private (high-sensitivity) |
-| Wardrobe, outfits, wear logs, wishlist | AltaWear | Private |
-| Item images | AltaWear | Private (storage) |
-| Skin baseline, observations, experiments | AltaLab | Private (high-sensitivity) |
-| Product / affiliate / program catalogue | Admin (shared) | Public/operational |
-| Educational articles | Admin (shared) | Public |
-| Aggregated analytics | Core/Admin | Anonymized/operational |
+| Data                                     | Domain         | Classification                      |
+| ---------------------------------------- | -------------- | ----------------------------------- |
+| Profile, preferences, consent            | Core           | Private (personal, low-sensitivity) |
+| Journal, check-ins, decisions, goals     | AltaMind       | Private (high-sensitivity)          |
+| Wardrobe, outfits, wear logs, wishlist   | AltaWear       | Private                             |
+| Item images                              | AltaWear       | Private (storage)                   |
+| Skin baseline, observations, experiments | AltaLab        | Private (high-sensitivity)          |
+| Product / affiliate / program catalogue  | Admin (shared) | Public/operational                  |
+| Educational articles                     | Admin (shared) | Public                              |
+| Aggregated analytics                     | Core/Admin     | Anonymized/operational              |
 
 Full column-level treatment is in `../database/INITIAL_DATA_MODEL.md`.
 

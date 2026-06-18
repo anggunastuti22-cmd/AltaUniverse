@@ -13,6 +13,7 @@ opt-in AI), and keep schema changes tracked in Git. A small team needs to move
 fast without operating bespoke infrastructure.
 
 Requirements driving the choice:
+
 - Relational data with strong integrity (many FKs across domains).
 - **Row Level Security** as the primary authorization mechanism.
 - Managed auth producing one identity (the Alta ID).
@@ -21,6 +22,7 @@ Requirements driving the choice:
 - Migrations tracked in version control.
 
 Options considered:
+
 1. **Supabase** — managed Postgres + Auth + Storage + Edge Functions, RLS-native.
 2. **Firebase** — managed, but document store; RLS-equivalent rules are less
    suited to our relational, cross-domain model.
@@ -43,6 +45,7 @@ Use **Supabase** as the backend platform:
 ## Consequences
 
 **Positive**
+
 - RLS gives us least-privilege, per-user isolation enforced at the database, not
   just in app code — directly satisfies our privacy principles.
 - One platform covers auth, data, storage, and server logic → fast to MVP.
@@ -50,12 +53,14 @@ Use **Supabase** as the backend platform:
 - Local dev parity via Supabase CLI; seed with development-only data.
 
 **Negative / costs**
+
 - Vendor coupling to Supabase APIs/conventions.
 - Service-role key must be tightly controlled (server-only; never in clients).
 - Edge Function runtime constraints for heavier workloads (acceptable at MVP).
 - RLS policies require disciplined authoring and testing.
 
 **Mitigations**
+
 - Keep data access behind shared helpers in `packages/database`; logic in
   `packages/domain` is pure, reducing direct coupling.
 - Enforce "service-role key server-only" via config schema + CI checks.

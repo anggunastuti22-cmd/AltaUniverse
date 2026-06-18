@@ -20,12 +20,12 @@ of migrations (ADR-002), never added manually in production.
 
 ## 2. Role model
 
-| Role | Who | Capability |
-| --- | --- | --- |
-| `anon` | Unauthenticated visitor | Read published public content only. |
-| `authenticated` | Signed-in user | CRUD own rows via RLS on private tables; read public content. |
-| `operator` (admin) | Platform operator | CRUD operational/public tables; read anonymized reporting views. **No grant on private tables.** |
-| `service_role` | Edge Functions only | Elevated; used for export/deletion/audited tasks. Never in clients. |
+| Role               | Who                     | Capability                                                                                       |
+| ------------------ | ----------------------- | ------------------------------------------------------------------------------------------------ |
+| `anon`             | Unauthenticated visitor | Read published public content only.                                                              |
+| `authenticated`    | Signed-in user          | CRUD own rows via RLS on private tables; read public content.                                    |
+| `operator` (admin) | Platform operator       | CRUD operational/public tables; read anonymized reporting views. **No grant on private tables.** |
+| `service_role`     | Edge Functions only     | Elevated; used for export/deletion/audited tasks. Never in clients.                              |
 
 ## 3. Default policy patterns
 

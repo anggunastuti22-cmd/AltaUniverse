@@ -64,6 +64,7 @@ domain      ──▶  ✗ database       (no I/O in domain)
 ```
 
 Rules:
+
 - Apps are thin; they orchestrate packages.
 - `domain` is pure and I/O-free so it is trivially testable.
 - No circular dependencies; enforced in CI.

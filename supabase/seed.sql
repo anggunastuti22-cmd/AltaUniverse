@@ -1,0 +1,9 @@
+-- Alta Universe — local development seed data.
+--
+-- RULES (see CLAUDE.md §8):
+--   * Development / synthetic data ONLY.
+--   * NEVER add production or real user data here.
+--
+-- This file is intentionally empty during the foundation phase. No application
+-- tables exist yet (migrations are added in later phases). Add development-only
+-- seed rows here once the core schema lands.

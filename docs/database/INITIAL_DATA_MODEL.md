@@ -18,6 +18,7 @@ migration itself; migrations are authored in `supabase/migrations/` per ADR-002.
 - "Surfaces": W=public web, A=auth web app, M=mobile, AD=admin.
 
 Legend for classification:
+
 - **Private (high)** — sensitive free text / images; strictest handling.
 - **Private** — user-owned, not free-form sensitive text.
 - **Operational** — platform content/config, not user-private.
@@ -28,6 +29,7 @@ Legend for classification:
 ## A. Alta Core
 
 ### `core_profiles`
+
 - **Purpose:** One unified profile per Alta ID.
 - **Key columns:** `id` (PK = `auth.users.id`), `display_name`, `locale`,
   `timezone`, `avatar_path`, `onboarding_completed_at`.
@@ -39,6 +41,7 @@ Legend for classification:
 - **Surfaces:** A, M, AD (limited).
 
 ### `core_preferences`
+
 - **Purpose:** User settings (theme, units, notification prefs).
 - **Key columns:** `user_id` (PK/FK), `theme`, `measurement_units`,
   `notif_*` flags.
@@ -49,6 +52,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `core_consents`
+
 - **Purpose:** Granular, revocable consent records (AI, analytics,
   notifications).
 - **Key columns:** `id`, `user_id`, `consent_type`, `granted` (bool),
@@ -62,6 +66,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `core_notifications`
+
 - **Purpose:** Notification centre items and delivery records.
 - **Key columns:** `id`, `user_id`, `type`, `title`, `body_ref`, `read_at`,
   `scheduled_for`, `sent_at`.
@@ -73,6 +78,7 @@ Legend for classification:
 - **Surfaces:** M (primary), A.
 
 ### `core_data_exports`
+
 - **Purpose:** Track user-initiated export requests.
 - **Key columns:** `id`, `user_id`, `status`, `requested_at`, `completed_at`,
   `artifact_path` (signed, expiring).
@@ -83,6 +89,7 @@ Legend for classification:
 - **Surfaces:** A; processed by Edge Function.
 
 ### `core_deletion_requests`
+
 - **Purpose:** Track account deletion with grace period.
 - **Key columns:** `id`, `user_id`, `status`, `requested_at`,
   `scheduled_purge_at`, `completed_at`.
@@ -93,6 +100,7 @@ Legend for classification:
 - **Surfaces:** A; processed by Edge Function.
 
 ### `ops_audit_log`
+
 - **Purpose:** Audit privileged/admin operations.
 - **Key columns:** `id`, `actor_id`, `actor_role`, `action`, `target_ref`,
   `created_at`, `metadata`.
@@ -107,6 +115,7 @@ Legend for classification:
 ## B. AltaMind
 
 ### `mind_checkins`
+
 - **Purpose:** Daily check-in (mood/energy + short note).
 - **Key columns:** `id`, `user_id`, `checkin_date`, `mood`, `energy`,
   `note` (short text).
@@ -117,6 +126,7 @@ Legend for classification:
 - **Surfaces:** M (primary), A.
 
 ### `mind_journal_entries`
+
 - **Purpose:** Private free-text journal.
 - **Key columns:** `id`, `user_id`, `body` (free text), `entry_date`,
   `life_domain_id` (nullable), `tags` (text[]).
@@ -127,6 +137,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `mind_life_domains`
+
 - **Purpose:** User-defined areas of life.
 - **Key columns:** `id`, `user_id`, `name`, `description`, `sort_order`.
 - **FKs:** `user_id` → `auth.users(id)`.
@@ -136,6 +147,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `mind_goals`
+
 - **Purpose:** Goals tied to life domains (reflective, not strict tracking).
 - **Key columns:** `id`, `user_id`, `life_domain_id`, `title`, `status`,
   `reflection`, `target_horizon`.
@@ -146,6 +158,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `mind_weekly_resets`
+
 - **Purpose:** Weekly review (wins, friction, intention).
 - **Key columns:** `id`, `user_id`, `week_start`, `wins`, `friction`,
   `intention`.
@@ -156,6 +169,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `mind_decisions`
+
 - **Purpose:** Decision room frames (options + factors + reflection).
 - **Key columns:** `id`, `user_id`, `title`, `context`, `options` (jsonb),
   `factors` (jsonb), `reflection`, `resolved_at`.
@@ -171,6 +185,7 @@ Legend for classification:
 ## C. AltaWear
 
 ### `wear_style_profiles`
+
 - **Purpose:** Style preferences (colors, fits, occasions).
 - **Key columns:** `user_id` (PK/FK), `preferred_colors` (text[]),
   `fit_notes`, `occasions` (text[]).
@@ -181,6 +196,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `wear_items`
+
 - **Purpose:** Wardrobe inventory.
 - **Key columns:** `id`, `user_id`, `name`, `category`, `attributes` (jsonb:
   color, material, brand), `price`, `currency`, `acquired_on`,
@@ -193,6 +209,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `wear_item_images`
+
 - **Purpose:** Photos of wardrobe items.
 - **Key columns:** `id`, `user_id`, `item_id`, `storage_path`, `width`,
   `height`.
@@ -204,6 +221,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `wear_outfits`
+
 - **Purpose:** Composed outfits.
 - **Key columns:** `id`, `user_id`, `name`, `occasion`, `notes`.
 - **FKs:** `user_id` → `auth.users(id)`.
@@ -213,6 +231,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `wear_outfit_items`
+
 - **Purpose:** Join of outfits ↔ items.
 - **Key columns:** `outfit_id`, `item_id`, `user_id`.
 - **FKs:** `outfit_id` → `wear_outfits(id)`; `item_id` → `wear_items(id)`;
@@ -223,6 +242,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `wear_wear_logs`
+
 - **Purpose:** Record of outfits/items worn (usage log).
 - **Key columns:** `id`, `user_id`, `worn_on`, `outfit_id` (nullable),
   `item_id` (nullable).
@@ -230,11 +250,12 @@ Legend for classification:
   `item_id` → `wear_items(id)`.
 - **Classification:** Private.
 - **RLS:** owner only.
-- **Retention:** account deletion. *Cost-per-wear is derived from this; not
-  stored.*
+- **Retention:** account deletion. _Cost-per-wear is derived from this; not
+  stored._
 - **Surfaces:** M (primary), A.
 
 ### `wear_wishlist`
+
 - **Purpose:** Mindful-purchase candidates.
 - **Key columns:** `id`, `user_id`, `name`, `reason`, `status`, `est_price`,
   `catalogue_product_id` (nullable).
@@ -253,6 +274,7 @@ Legend for classification:
 ## D. AltaLab
 
 ### `lab_skin_baseline`
+
 - **Purpose:** Self-described skin type/concerns (**not a diagnosis**).
 - **Key columns:** `user_id` (PK/FK), `skin_type`, `concerns` (text[]),
   `sensitivities` (text[]), `notes`.
@@ -263,6 +285,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `lab_products`
+
 - **Purpose:** User's skincare product cabinet.
 - **Key columns:** `id`, `user_id`, `name`, `brand`, `category`,
   `key_ingredients` (text[]), `price`, `currency`, `opened_on`,
@@ -275,6 +298,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `lab_routines`
+
 - **Purpose:** Morning/evening routines.
 - **Key columns:** `id`, `user_id`, `time_of_day` (am/pm), `name`.
 - **FKs:** `user_id` → `auth.users(id)`.
@@ -284,6 +308,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `lab_routine_steps`
+
 - **Purpose:** Ordered steps in a routine, referencing products.
 - **Key columns:** `id`, `user_id`, `routine_id`, `product_id`, `step_order`,
   `instruction`.
@@ -295,6 +320,7 @@ Legend for classification:
 - **Surfaces:** A, M.
 
 ### `lab_observations`
+
 - **Purpose:** Dated skin observations (text + optional photo).
 - **Key columns:** `id`, `user_id`, `observed_on`, `note`, `image_path`
   (nullable).
@@ -305,6 +331,7 @@ Legend for classification:
 - **Surfaces:** M (primary), A.
 
 ### `lab_experiments`
+
 - **Purpose:** Product experiment journal (hypothesis → observed effect).
 - **Key columns:** `id`, `user_id`, `product_id` (nullable), `hypothesis`,
   `started_on`, `ended_on`, `outcome`.
@@ -322,6 +349,7 @@ Legend for classification:
 ## E. Shared operational / public (Admin-managed)
 
 ### `ops_articles`
+
 - **Purpose:** Educational articles / content.
 - **Key columns:** `id`, `slug`, `title`, `domain` (mind/wear/lab/universe),
   `body`, `status`, `published_at`.
@@ -332,6 +360,7 @@ Legend for classification:
 - **Surfaces:** W (read), AD (write).
 
 ### `ops_products`
+
 - **Purpose:** Product catalogue (reference data for cabinet/wardrobe linking).
 - **Key columns:** `id`, `name`, `brand`, `category`, `attributes` (jsonb),
   `status`.
@@ -342,6 +371,7 @@ Legend for classification:
 - **Surfaces:** W, A, M (read), AD (write).
 
 ### `ops_affiliate_links`
+
 - **Purpose:** Affiliate catalogue (outbound links only).
 - **Key columns:** `id`, `product_id`, `url`, `partner`, `status`.
 - **FKs:** `product_id` → `ops_products(id)`.
@@ -351,6 +381,7 @@ Legend for classification:
 - **Surfaces:** W, A (read), AD (write).
 
 ### `ops_programs`
+
 - **Purpose:** Structured programs/content series.
 - **Key columns:** `id`, `slug`, `title`, `domain`, `description`, `status`.
 - **FKs:** none.
@@ -360,6 +391,7 @@ Legend for classification:
 - **Surfaces:** W (read), AD (write).
 
 ### Reporting views (analytics)
+
 - **Purpose:** Aggregated, anonymized metrics for admin.
 - **Key columns:** counts/aggregates only; **no user_id, no private text.**
 - **Classification:** Operational (anonymized).

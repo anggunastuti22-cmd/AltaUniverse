@@ -36,7 +36,7 @@ They are written to validate scope and surface boundaries, not as UI specs.
    links it to a life domain ("Career").
 4. On Sunday, **Weekly reset** prompts him: wins, friction, next-week intention.
 5. Facing a hard choice, he opens **Decision room**, lists options and factors,
-   and writes a reflection. *Alta never tells him what to choose.*
+   and writes a reflection. _Alta never tells him what to choose._
 
 **Boundaries proven:** capture is mobile-first; journal text is private and
 never enters analytics; decision room is reflective only.
@@ -63,8 +63,8 @@ buying; images stored privately.
 
 ## J4. AltaLab — routine, observation, experiment
 
-1. Maya sets a **skin baseline** (self-described type, concerns) — clearly *not
-   a diagnosis*.
+1. Maya sets a **skin baseline** (self-described type, concerns) — clearly _not
+   a diagnosis_.
 2. She adds products to the **skincare product cabinet**.
 3. She builds **morning** and **evening routines** from those products.
 4. Nightly (mobile) she logs a **skin observation** (text + optional photo).
@@ -82,8 +82,8 @@ no medical claims.
 1. Alta Home shows Maya a single view: today's check-in status, this evening's
    skincare reminder, and her most-worn outfit this week.
 2. A weekly reset in AltaMind can reference (with her consent) that she felt low
-   energy on days she skipped her routine — surfaced as a *pattern to reflect
-   on*, never as advice or diagnosis.
+   energy on days she skipped her routine — surfaced as a _pattern to reflect
+   on_, never as advice or diagnosis.
 3. One profile, one set of preferences, one privacy centre govern all three.
 
 **Boundaries proven:** cross-domain reflection stays reflective; consent gates

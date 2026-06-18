@@ -16,51 +16,51 @@ consumption.
 
 ## 2. Alta Core (shared foundation)
 
-| Capability | Description | Surfaces |
-| --- | --- | --- |
-| Sign-up & login | Email/password + magic link via Supabase Auth. | web, mobile |
-| Onboarding | Lightweight intro, consent capture, domain selection. | web, mobile |
-| Unified profile | One Alta ID; display name, locale, timezone, avatar. | web, mobile, admin (limited) |
-| User preferences | Theme, units, notification preferences, AI opt-in. | web, mobile |
-| Consent management | Granular, revocable consents (AI, analytics, notifications). | web, mobile |
-| Alta Home | Cross-domain dashboard; today's check-in, reminders, recent activity. | web, mobile |
-| Notifications | Routine reminders, weekly reset nudge, notification centre. | mobile (primary), web |
-| Data export | User-initiated export of all personal data. | web |
-| Account deletion | User-initiated, irreversible deletion with grace period. | web |
+| Capability         | Description                                                           | Surfaces                     |
+| ------------------ | --------------------------------------------------------------------- | ---------------------------- |
+| Sign-up & login    | Email/password + magic link via Supabase Auth.                        | web, mobile                  |
+| Onboarding         | Lightweight intro, consent capture, domain selection.                 | web, mobile                  |
+| Unified profile    | One Alta ID; display name, locale, timezone, avatar.                  | web, mobile, admin (limited) |
+| User preferences   | Theme, units, notification preferences, AI opt-in.                    | web, mobile                  |
+| Consent management | Granular, revocable consents (AI, analytics, notifications).          | web, mobile                  |
+| Alta Home          | Cross-domain dashboard; today's check-in, reminders, recent activity. | web, mobile                  |
+| Notifications      | Routine reminders, weekly reset nudge, notification centre.           | mobile (primary), web        |
+| Data export        | User-initiated export of all personal data.                           | web                          |
+| Account deletion   | User-initiated, irreversible deletion with grace period.              | web                          |
 
 ## 3. AltaMind (MVP)
 
-| Capability | Description |
-| --- | --- |
-| Daily check-in | Mood/energy/short note; one per day, editable same day. |
-| Journal | Private free-text entries, optional tags, optional domain link. |
-| Life domains | User-defined areas of life (e.g., career, health, relationships). |
-| Goals | Goals attached to life domains; status and reflection, not strict tracking. |
-| Weekly reset | Guided weekly review: wins, friction, intention for next week. |
-| Decision room | Structured space to frame a decision (options, factors, reflection). **Reflective, never decides for the user.** |
+| Capability     | Description                                                                                                      |
+| -------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Daily check-in | Mood/energy/short note; one per day, editable same day.                                                          |
+| Journal        | Private free-text entries, optional tags, optional domain link.                                                  |
+| Life domains   | User-defined areas of life (e.g., career, health, relationships).                                                |
+| Goals          | Goals attached to life domains; status and reflection, not strict tracking.                                      |
+| Weekly reset   | Guided weekly review: wins, friction, intention for next week.                                                   |
+| Decision room  | Structured space to frame a decision (options, factors, reflection). **Reflective, never decides for the user.** |
 
 ## 4. AltaWear (MVP)
 
-| Capability | Description |
-| --- | --- |
-| Style profile | Preferences, colors, fit notes, occasions. |
+| Capability         | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| Style profile      | Preferences, colors, fit notes, occasions.                |
 | Wardrobe inventory | Items with category, attributes, price, acquisition date. |
-| Item images | User photos of items via Supabase Storage. |
-| Outfit builder | Compose outfits from inventory items. |
-| Outfit usage log | Record when an outfit/item was worn. |
-| Cost-per-wear | Derived metric: item price ÷ wear count. |
-| Wishlist | Mindful-purchase candidates with reason and status. |
+| Item images        | User photos of items via Supabase Storage.                |
+| Outfit builder     | Compose outfits from inventory items.                     |
+| Outfit usage log   | Record when an outfit/item was worn.                      |
+| Cost-per-wear      | Derived metric: item price ÷ wear count.                  |
+| Wishlist           | Mindful-purchase candidates with reason and status.       |
 
 ## 5. AltaLab (MVP)
 
-| Capability | Description |
-| --- | --- |
-| Skin baseline | Self-described skin type, concerns, sensitivities. **Not a diagnosis.** |
-| Skincare product cabinet | Products owned, with category, key ingredients, price. |
-| Morning & evening routine | Ordered step lists referencing cabinet products. |
-| Skin observation log | Private, dated observations (text + optional photo). |
-| Product experiment journal | Structured trials: hypothesis, product, duration, observed effect. |
-| Routine cost | Derived spend per routine / per use. |
+| Capability                 | Description                                                             |
+| -------------------------- | ----------------------------------------------------------------------- |
+| Skin baseline              | Self-described skin type, concerns, sensitivities. **Not a diagnosis.** |
+| Skincare product cabinet   | Products owned, with category, key ingredients, price.                  |
+| Morning & evening routine  | Ordered step lists referencing cabinet products.                        |
+| Skin observation log       | Private, dated observations (text + optional photo).                    |
+| Product experiment journal | Structured trials: hypothesis, product, duration, observed effect.      |
+| Routine cost               | Derived spend per routine / per use.                                    |
 
 ## 6. Cross-cutting MVP requirements
 
@@ -78,7 +78,7 @@ These are recognized as plausible future work but **must not** be built now:
 - Marketplace, checkout, or in-app purchasing of products.
 - Affiliate purchasing flows beyond a read-only catalogue in admin.
 - Advanced AI: auto-generated outfits, AI skin analysis from photos, predictive
-  mood analysis. (AI hooks are *opt-in and deferred*; see roadmap.)
+  mood analysis. (AI hooks are _opt-in and deferred_; see roadmap.)
 - Medical/diagnostic features of any kind.
 - Wearable/device integrations.
 - Team, family, or multi-user shared accounts.

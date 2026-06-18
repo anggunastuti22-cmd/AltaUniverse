@@ -12,11 +12,11 @@ care for themselves — connected into one intelligent life system.
 
 ## 2. The three domains
 
-| Domain | Purpose | Promise to the user |
-| --- | --- | --- |
-| **AltaMind** | Mind, decisions, goals, emotions, routines, direction. | *Understand yourself.* |
-| **AltaWear** | Wardrobe, personal style, professional presence, mindful purchasing. | *Express yourself.* |
-| **AltaLab** | Skincare routines, product usage, skin observations, mindful spending. | *Care for yourself.* |
+| Domain       | Purpose                                                                | Promise to the user    |
+| ------------ | ---------------------------------------------------------------------- | ---------------------- |
+| **AltaMind** | Mind, decisions, goals, emotions, routines, direction.                 | _Understand yourself._ |
+| **AltaWear** | Wardrobe, personal style, professional presence, mindful purchasing.   | _Express yourself._    |
+| **AltaLab**  | Skincare routines, product usage, skin observations, mindful spending. | _Care for yourself._   |
 
 Alta Universe is the connective layer that links these three into a single,
 privacy-conscious life system with one identity, one profile, and one set of
@@ -89,7 +89,7 @@ positioning.
 
 - Users return to log/check in across **more than one** domain.
 - Users complete a weekly reset and report it felt useful, not nagging.
-- Users make a wardrobe or skincare decision they describe as *more mindful*.
+- Users make a wardrobe or skincare decision they describe as _more mindful_.
 - Zero privacy incidents; admin never needs (or has) access to private entries.
 
 > Quantitative product metrics are deliberately deferred until after the first

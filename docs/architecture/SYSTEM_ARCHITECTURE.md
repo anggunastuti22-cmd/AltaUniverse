@@ -33,33 +33,36 @@ types, validation, and design tokens shared across all clients.
 
 ## 2. Technology choices
 
-| Concern | Choice | Rationale (see ADRs) |
-| --- | --- | --- |
-| Repo model | TypeScript monorepo | One identity/domain logic shared across surfaces. ADR-001. |
-| Public + app web | Next.js | SSR/ISR for public pages; app router for authed app. |
-| Mobile | Expo React Native | Single RN codebase; OTA updates; native capture flows. |
-| Admin | Next.js (separate app) | Hard separation from user surfaces; own role/deploy. |
-| Database | Supabase Postgres | Relational, RLS-native, migrations in Git. ADR-002. |
-| Auth | Supabase Auth | Managed identity; one Alta ID. ADR-003. |
-| File storage | Supabase Storage | Private buckets for item/skin images. |
-| Server logic | Supabase Edge Functions | Privileged/secret-bearing operations off the client. |
-| Package/build | pnpm workspaces + Turborepo (proposed) | Fast, cacheable monorepo builds. |
+| Concern          | Choice                                 | Rationale (see ADRs)                                       |
+| ---------------- | -------------------------------------- | ---------------------------------------------------------- |
+| Repo model       | TypeScript monorepo                    | One identity/domain logic shared across surfaces. ADR-001. |
+| Public + app web | Next.js                                | SSR/ISR for public pages; app router for authed app.       |
+| Mobile           | Expo React Native                      | Single RN codebase; OTA updates; native capture flows.     |
+| Admin            | Next.js (separate app)                 | Hard separation from user surfaces; own role/deploy.       |
+| Database         | Supabase Postgres                      | Relational, RLS-native, migrations in Git. ADR-002.        |
+| Auth             | Supabase Auth                          | Managed identity; one Alta ID. ADR-003.                    |
+| File storage     | Supabase Storage                       | Private buckets for item/skin images.                      |
+| Server logic     | Supabase Edge Functions                | Privileged/secret-bearing operations off the client.       |
+| Package/build    | pnpm workspaces + Turborepo (proposed) | Fast, cacheable monorepo builds.                           |
 
 ## 3. Surfaces
 
 ### 3.1 `apps/web` — public site + authenticated app
+
 - **Public:** Alta Universe homepage, three domain landing pages, product/program
   pages, articles. Mostly static/ISR; no private data.
 - **Authenticated:** Alta Home, three domain workspaces, account & privacy
   centre. Talks to Supabase with the user's session; RLS enforces scope.
 
 ### 3.2 `apps/mobile` — Expo React Native
+
 - Capture-first: daily check-in, quick journal, outfit logging, skin logging,
   routine reminders, notification centre.
 - Uses the same shared `domain`/`validation`/`types` packages and the same
   Supabase project.
 
 ### 3.3 `apps/admin` — operator console
+
 - Content management, product/affiliate catalogue, program management,
   aggregated analytics, support tools.
 - **Runs as a separate application** with operator authentication and a
@@ -68,15 +71,15 @@ types, validation, and design tokens shared across all clients.
 
 ## 4. Shared packages
 
-| Package | Responsibility |
-| --- | --- |
-| `packages/database` | Generated DB types, typed Supabase client factory, query helpers. |
-| `packages/domain` | Pure domain logic (cost-per-wear, routine cost, weekly-reset rules). No I/O. |
-| `packages/validation` | Zod schemas shared by clients and Edge Functions. |
-| `packages/ui` | Reusable, accessible React/React Native-friendly components. |
-| `packages/design-tokens` | Colors, typography, spacing — single source of truth. |
-| `packages/analytics` | Privacy-safe event contracts; **no private text**, ever. |
-| `packages/config` | Shared TS config, lint config, env schema (no secrets). |
+| Package                  | Responsibility                                                               |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| `packages/database`      | Generated DB types, typed Supabase client factory, query helpers.            |
+| `packages/domain`        | Pure domain logic (cost-per-wear, routine cost, weekly-reset rules). No I/O. |
+| `packages/validation`    | Zod schemas shared by clients and Edge Functions.                            |
+| `packages/ui`            | Reusable, accessible React/React Native-friendly components.                 |
+| `packages/design-tokens` | Colors, typography, spacing — single source of truth.                        |
+| `packages/analytics`     | Privacy-safe event contracts; **no private text**, ever.                     |
+| `packages/config`        | Shared TS config, lint config, env schema (no secrets).                      |
 
 Principle: **logic lives in packages; apps are thin.** A rule (e.g., "one
 check-in per day") is implemented once and reused everywhere.

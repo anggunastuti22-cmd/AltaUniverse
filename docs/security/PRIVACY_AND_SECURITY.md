@@ -27,12 +27,12 @@ the authoritative statement of how Alta Universe protects users.
 
 ## 2. Data classification
 
-| Class | Examples | Handling |
-| --- | --- | --- |
-| Private (high) | journal, check-ins, decisions, weekly resets, skin baseline, observations, experiments, images | RLS owner-only; never in analytics; encrypted at rest (Supabase); private Storage. |
-| Private | profile, preferences, wardrobe, outfits, wear logs, wishlist, products, routines | RLS owner-only. |
-| Compliance | consents, deletion/export records, audit log | Restricted; retained per policy. |
-| Operational/Public | articles, product/affiliate/program catalogue, anonymized analytics | Public read where published; operator-managed. |
+| Class              | Examples                                                                                       | Handling                                                                           |
+| ------------------ | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Private (high)     | journal, check-ins, decisions, weekly resets, skin baseline, observations, experiments, images | RLS owner-only; never in analytics; encrypted at rest (Supabase); private Storage. |
+| Private            | profile, preferences, wardrobe, outfits, wear logs, wishlist, products, routines               | RLS owner-only.                                                                    |
+| Compliance         | consents, deletion/export records, audit log                                                   | Restricted; retained per policy.                                                   |
+| Operational/Public | articles, product/affiliate/program catalogue, anonymized analytics                            | Public read where published; operator-managed.                                     |
 
 See `../database/INITIAL_DATA_MODEL.md` for table-level classification.
 

@@ -1,0 +1,46 @@
+/* Base resets + accessibility primitives. Theme variables (--alta-*) are
+   injected from @alta/design-tokens in the root layout (single source of truth). */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--alta-font-family-sans);
+  font-size: var(--alta-font-size-base);
+  line-height: var(--alta-line-height-normal);
+  color: var(--alta-color-text);
+  background-color: var(--alta-color-background);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accessible, keyboard-only focus indication. */
+:focus-visible {
+  outline: 2px solid var(--alta-color-focusRing);
+  outline-offset: 2px;
+  border-radius: var(--alta-radius-sm);
+}
+
+a {
+  color: var(--alta-color-primary);
+}
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -13,6 +13,7 @@ Home, cross-domain reflection (with consent), one privacy centre — only works 
 every domain references the same user.
 
 Options considered:
+
 1. **One shared identity (single Alta ID)** for all domains and surfaces.
 2. **Per-domain identities** linked by some mapping table.
 3. **Separate accounts per app** that users optionally connect later.
@@ -37,12 +38,14 @@ and present results as reflection, never as authoritative inference (see
 ## Consequences
 
 **Positive**
+
 - Delivers the core "one identity, three expressions" promise.
 - Single profile/preferences/consent/privacy centre — no duplication or drift.
 - RLS is uniform: `user_id = auth.uid()` works identically across all domains.
 - Export and deletion are coherent: one identity → all data.
 
 **Negative / costs**
+
 - The Alta ID is a high-value blast radius; its compromise affects all domains.
   Mitigated by RLS, least privilege, audited privileged ops, and no client
   secrets.
@@ -50,6 +53,7 @@ and present results as reflection, never as authoritative inference (see
   between domains.
 
 **Mitigations**
+
 - Consent is granular and revocable; cross-domain reads require explicit
   consent.
 - Domain boundaries are enforced in code (`packages/domain`, `validation`) and
