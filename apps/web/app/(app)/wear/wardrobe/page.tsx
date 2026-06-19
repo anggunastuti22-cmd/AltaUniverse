@@ -18,17 +18,36 @@ export default async function WardrobePage({
   } = await supabase.auth.getUser();
   if (!user) redirect('/login');
 
-  const [{ data: items }, { data: usage }] = await Promise.all([
+  const [{ data: items }, { data: usage }, { data: images }] = await Promise.all([
     supabase
       .from('wear_items')
       .select('id, name, category, brand, color, price, currency')
       .order('created_at', { ascending: false }),
     supabase.from('wear_usage_logs').select('item_id'),
+    supabase.from('wear_item_images').select('item_id, storage_path'),
   ]);
 
   const wears = new Map<string, number>();
   for (const u of usage ?? []) {
     if (u.item_id) wears.set(u.item_id, (wears.get(u.item_id) ?? 0) + 1);
+  }
+
+  // First image per item, resolved to a short-lived signed URL (private bucket).
+  const firstPath = new Map<string, string>();
+  for (const im of images ?? []) {
+    if (!firstPath.has(im.item_id)) firstPath.set(im.item_id, im.storage_path);
+  }
+  const imageUrl = new Map<string, string>();
+  const paths = [...firstPath.values()];
+  if (paths.length > 0) {
+    const { data: signed } = await supabase.storage
+      .from('wardrobe-images')
+      .createSignedUrls(paths, 3600);
+    const byPath = new Map((signed ?? []).map((s) => [s.path, s.signedUrl]));
+    for (const [itemId, p] of firstPath) {
+      const url = byPath.get(p);
+      if (url) imageUrl.set(itemId, url);
+    }
   }
 
   const all = items ?? [];
@@ -113,6 +132,12 @@ export default async function WardrobePage({
               </label>
               <input id="acquired_on" name="acquired_on" type="date" style={fieldStyle} />
             </div>
+            <div>
+              <label style={labelStyle} htmlFor="image">
+                Photo (optional)
+              </label>
+              <input id="image" name="image" type="file" accept="image/*" style={fieldStyle} />
+            </div>
           </div>
           <div>
             <button type="submit" style={primaryBtn}>
@@ -149,22 +174,35 @@ export default async function WardrobePage({
             const cpw = costPerWear(it.price, count);
             return (
               <div key={it.id} style={{ ...card, padding: 0, overflow: 'hidden' }}>
-                <div
-                  aria-hidden
-                  style={{
-                    aspectRatio: '4 / 5',
-                    background: color.surfaceMuted,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: color.textSubtle,
-                    fontFamily: 'var(--alta-font-family-mono)',
-                    fontSize: fontSize.xs,
-                    letterSpacing: '0.1em',
-                  }}
-                >
-                  {it.category.slice(0, 8).toUpperCase()}
-                </div>
+                {imageUrl.get(it.id) ? (
+                  <img
+                    src={imageUrl.get(it.id)}
+                    alt={it.name}
+                    style={{
+                      width: '100%',
+                      aspectRatio: '4 / 5',
+                      objectFit: 'cover',
+                      display: 'block',
+                    }}
+                  />
+                ) : (
+                  <div
+                    aria-hidden
+                    style={{
+                      aspectRatio: '4 / 5',
+                      background: color.surfaceMuted,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: color.textSubtle,
+                      fontFamily: 'var(--alta-font-family-mono)',
+                      fontSize: fontSize.xs,
+                      letterSpacing: '0.1em',
+                    }}
+                  >
+                    {it.category.slice(0, 8).toUpperCase()}
+                  </div>
+                )}
                 <div style={{ padding: space.md }}>
                   <strong style={{ display: 'block', color: color.text }}>{it.name}</strong>
                   <span style={{ ...muted, fontSize: fontSize.xs }}>

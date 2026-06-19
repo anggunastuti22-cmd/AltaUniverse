@@ -110,10 +110,24 @@ export async function addRoutineStep(formData: FormData): Promise<void> {
 
 export async function logObservation(formData: FormData): Promise<void> {
   const { supabase, user } = await requireUser();
+
+  let imagePath: string | null = null;
+  const image = formData.get('image');
+  if (image instanceof File && image.size > 0) {
+    const ext =
+      (image.name.split('.').pop() ?? 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
+    const path = `${user.id}/${Date.now()}.${ext}`;
+    const { error: upErr } = await supabase.storage
+      .from('skin-images')
+      .upload(path, image, { contentType: image.type || 'image/jpeg', upsert: false });
+    if (!upErr) imagePath = path;
+  }
+
   const { error } = await supabase.from('lab_skin_logs').insert({
     user_id: user.id,
     observed_on: str(formData, 'observed_on') ?? new Date().toISOString().slice(0, 10),
     note: str(formData, 'note'),
+    image_path: imagePath,
   });
   if (error) redirect(`/lab/observations?error=${encodeURIComponent(error.message)}`);
   redirect('/lab/observations');

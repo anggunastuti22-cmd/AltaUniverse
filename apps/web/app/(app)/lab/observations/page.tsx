@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { color, fontSize, space } from '@alta/design-tokens';
+import { color, fontSize, radius, space } from '@alta/design-tokens';
 import { createClient } from '@/lib/supabase/server';
 import { card, fieldStyle, label as labelStyle, muted, page, primaryBtn } from '../ui';
 import { logObservation } from '../actions';
@@ -18,10 +18,27 @@ export default async function ObservationsPage({
 
   const { data: logs } = await supabase
     .from('lab_skin_logs')
-    .select('id, observed_on, note')
+    .select('id, observed_on, note, image_path')
     .order('observed_on', { ascending: false })
     .limit(60);
   const today = new Date().toISOString().slice(0, 10);
+
+  // Resolve private skin-image paths to short-lived signed URLs.
+  const imageUrl = new Map<string, string>();
+  const withImages = (logs ?? []).filter(
+    (l): l is typeof l & { image_path: string } => !!l.image_path,
+  );
+  if (withImages.length > 0) {
+    const { data: signed } = await supabase.storage.from('skin-images').createSignedUrls(
+      withImages.map((l) => l.image_path),
+      3600,
+    );
+    const byPath = new Map((signed ?? []).map((s) => [s.path, s.signedUrl]));
+    for (const l of withImages) {
+      const url = byPath.get(l.image_path);
+      if (url) imageUrl.set(l.id, url);
+    }
+  }
 
   return (
     <div style={page}>
@@ -60,6 +77,12 @@ export default async function ObservationsPage({
             style={{ ...fieldStyle, resize: 'vertical' }}
           />
         </div>
+        <div>
+          <label style={labelStyle} htmlFor="image">
+            Photo (optional, private)
+          </label>
+          <input id="image" name="image" type="file" accept="image/*" style={fieldStyle} />
+        </div>
         <button type="submit" style={primaryBtn}>
           Save observation
         </button>
@@ -75,6 +98,18 @@ export default async function ObservationsPage({
               <p style={{ margin: `${space.xs}px 0 0`, color: color.text, whiteSpace: 'pre-wrap' }}>
                 {l.note}
               </p>
+              {imageUrl.get(l.id) ? (
+                <img
+                  src={imageUrl.get(l.id)}
+                  alt="Skin observation"
+                  style={{
+                    marginTop: space.sm,
+                    maxWidth: 220,
+                    borderRadius: radius.md,
+                    display: 'block',
+                  }}
+                />
+              ) : null}
             </article>
           ))
         )}

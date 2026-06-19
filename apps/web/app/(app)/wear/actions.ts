@@ -40,18 +40,39 @@ export async function addItem(formData: FormData): Promise<void> {
   const name = str(formData, 'name');
   const category = str(formData, 'category');
   if (!name || !category) redirect('/wear/wardrobe?error=required');
-  const { error } = await supabase.from('wear_items').insert({
-    user_id: user.id,
-    name,
-    category,
-    brand: str(formData, 'brand'),
-    color: str(formData, 'color'),
-    material: str(formData, 'material'),
-    price: num(formData, 'price'),
-    currency: str(formData, 'currency') ?? 'USD',
-    acquired_on: str(formData, 'acquired_on'),
-  });
-  if (error) redirect(`/wear/wardrobe?error=${encodeURIComponent(error.message)}`);
+  const { data: item, error } = await supabase
+    .from('wear_items')
+    .insert({
+      user_id: user.id,
+      name,
+      category,
+      brand: str(formData, 'brand'),
+      color: str(formData, 'color'),
+      material: str(formData, 'material'),
+      price: num(formData, 'price'),
+      currency: str(formData, 'currency') ?? 'USD',
+      acquired_on: str(formData, 'acquired_on'),
+    })
+    .select('id')
+    .single();
+  if (error || !item)
+    redirect(`/wear/wardrobe?error=${encodeURIComponent(error?.message ?? 'failed')}`);
+
+  const image = formData.get('image');
+  if (image instanceof File && image.size > 0) {
+    const ext =
+      (image.name.split('.').pop() ?? 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
+    const path = `${user.id}/${item.id}/${Date.now()}.${ext}`;
+    const { error: upErr } = await supabase.storage
+      .from('wardrobe-images')
+      .upload(path, image, { contentType: image.type || 'image/jpeg', upsert: false });
+    if (!upErr) {
+      await supabase
+        .from('wear_item_images')
+        .insert({ user_id: user.id, item_id: item.id, storage_path: path });
+    }
+  }
+
   redirect('/wear/wardrobe');
 }
 
