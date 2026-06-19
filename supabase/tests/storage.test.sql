@@ -60,8 +60,10 @@ reset role;
 set local role anon;
 select set_config('request.jwt.claims', '', true);
 
-select ok((select count(*)::int from storage.objects where bucket_id = 'avatars') >= 1,
-  'anon can read public avatars');
+-- After 0009 hardening the broad avatars SELECT policy was removed, so anon can
+-- no longer LIST avatars via the API (public delivery is via the bucket URL).
+select is((select count(*)::int from storage.objects where bucket_id = 'avatars'), 0,
+  'anon cannot list avatars via the storage API (hardened)');
 select is((select count(*)::int from storage.objects where bucket_id = 'skin-images'), 0,
   'anon cannot read private skin images');
 select is((select count(*)::int from storage.objects where bucket_id = 'content-assets'), 1,
