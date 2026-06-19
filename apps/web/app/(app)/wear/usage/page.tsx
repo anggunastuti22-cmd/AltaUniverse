@@ -79,22 +79,36 @@ export default async function UsagePage({
         </button>
       </form>
 
-      <div style={{ marginTop: space.xl, display: 'grid', gap: space.xs }}>
+      <div style={{ marginTop: space.xl }}>
         {(logs ?? []).length === 0 ? (
           <p style={muted}>No wears logged yet.</p>
         ) : (
-          (logs ?? []).map((l) => (
-            <div
-              key={l.id}
-              style={{ ...card, display: 'flex', justifyContent: 'space-between', gap: space.sm }}
-            >
-              <span style={{ color: color.text }}>
-                {l.item_id ? (itemName.get(l.item_id) ?? 'Item') : 'Outfit'}
-                {l.note ? <span style={muted}> · {l.note}</span> : null}
-              </span>
-              <span style={{ ...muted, fontSize: fontSize.xs }}>{l.worn_on}</span>
-            </div>
-          ))
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: fontSize.sm }}>
+            <caption style={{ ...muted, textAlign: 'left', marginBottom: space.sm }}>
+              Recent wears
+            </caption>
+            <thead>
+              <tr style={{ textAlign: 'left', color: color.textMuted }}>
+                <th scope="col" style={{ padding: `${space.xs}px ${space.sm}px`, fontWeight: 600 }}>
+                  Item worn
+                </th>
+                <th scope="col" style={{ padding: `${space.xs}px ${space.sm}px`, fontWeight: 600 }}>
+                  Date
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {(logs ?? []).map((l) => (
+                <tr key={l.id} style={{ borderTop: `1px solid ${color.border}` }}>
+                  <td style={{ padding: `${space.sm}px`, color: color.text }}>
+                    {l.item_id ? (itemName.get(l.item_id) ?? 'Item') : 'Outfit'}
+                    {l.note ? <span style={muted}> · {l.note}</span> : null}
+                  </td>
+                  <td style={{ padding: `${space.sm}px`, color: color.textMuted }}>{l.worn_on}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
     </div>

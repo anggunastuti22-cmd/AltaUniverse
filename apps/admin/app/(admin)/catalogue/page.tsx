@@ -99,80 +99,96 @@ export default async function CataloguePage({
         </button>
       </form>
 
-      <div style={{ display: 'grid', gap: space.sm }}>
-        {(products ?? []).length === 0 ? (
-          <p style={{ color: color.textMuted }}>No products yet.</p>
-        ) : (
-          (products ?? []).map((p) => (
-            <div
-              key={p.id}
-              style={{ ...cardStyle, display: 'flex', alignItems: 'center', gap: space.md }}
-            >
-              <div style={{ flex: 1 }}>
-                <h2
+      {(products ?? []).length === 0 ? (
+        <p style={{ color: color.textMuted }}>No products yet.</p>
+      ) : (
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: fontSize.sm }}>
+          <caption style={{ color: color.textMuted, textAlign: 'left', marginBottom: space.sm }}>
+            Catalogue products
+          </caption>
+          <thead>
+            <tr style={{ textAlign: 'left', color: color.textMuted }}>
+              <th scope="col" style={{ padding: `${space.xs}px ${space.sm}px`, fontWeight: 600 }}>
+                Product
+              </th>
+              <th scope="col" style={{ padding: `${space.xs}px ${space.sm}px`, fontWeight: 600 }}>
+                Details
+              </th>
+              <th scope="col" style={{ padding: `${space.xs}px ${space.sm}px`, fontWeight: 600 }}>
+                Status
+              </th>
+              <th scope="col" style={{ padding: `${space.xs}px ${space.sm}px`, fontWeight: 600 }}>
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {(products ?? []).map((p) => (
+              <tr key={p.id} style={{ borderTop: `1px solid ${color.border}` }}>
+                <th
+                  scope="row"
                   style={{
-                    display: 'inline',
-                    margin: 0,
-                    fontSize: fontSize.base,
+                    padding: space.sm,
                     fontWeight: 600,
                     color: color.text,
+                    textAlign: 'left',
                   }}
                 >
                   {p.name}
-                </h2>
-                <span
-                  style={{ color: color.textMuted, fontSize: fontSize.xs, marginLeft: space.sm }}
-                >
+                </th>
+                <td style={{ padding: space.sm, color: color.textMuted }}>
                   {p.brand ? `${p.brand} · ` : ''}
                   {p.category}
-                </span>
-                <div>
-                  <span
-                    style={{
-                      fontSize: fontSize.xs,
-                      color: p.is_published ? color.success : color.textSubtle,
-                    }}
-                  >
-                    {p.is_published ? 'Published' : 'Draft'}
-                  </span>
-                </div>
-              </div>
-              <form action={togglePublish}>
-                <input type="hidden" name="id" value={p.id} />
-                <input type="hidden" name="next" value={p.is_published ? 'false' : 'true'} />
-                <button
-                  type="submit"
+                </td>
+                <td
                   style={{
-                    border: `1px solid ${color.border}`,
-                    background: 'transparent',
-                    borderRadius: radius.md,
-                    padding: `${space.xs}px ${space.md}px`,
-                    cursor: 'pointer',
-                    fontSize: fontSize.sm,
+                    padding: space.sm,
+                    color: p.is_published ? color.success : color.textSubtle,
                   }}
                 >
-                  {p.is_published ? 'Unpublish' : 'Publish'}
-                </button>
-              </form>
-              <form action={deleteProduct}>
-                <input type="hidden" name="id" value={p.id} />
-                <button
-                  type="submit"
-                  style={{
-                    border: 'none',
-                    background: 'transparent',
-                    color: color.danger,
-                    cursor: 'pointer',
-                    fontSize: fontSize.sm,
-                  }}
-                >
-                  Delete
-                </button>
-              </form>
-            </div>
-          ))
-        )}
-      </div>
+                  {p.is_published ? 'Published' : 'Draft'}
+                </td>
+                <td style={{ padding: space.sm }}>
+                  <div style={{ display: 'flex', gap: space.sm }}>
+                    <form action={togglePublish}>
+                      <input type="hidden" name="id" value={p.id} />
+                      <input type="hidden" name="next" value={p.is_published ? 'false' : 'true'} />
+                      <button
+                        type="submit"
+                        style={{
+                          border: `1px solid ${color.border}`,
+                          background: 'transparent',
+                          borderRadius: radius.md,
+                          padding: `${space.xs}px ${space.md}px`,
+                          cursor: 'pointer',
+                          fontSize: fontSize.sm,
+                        }}
+                      >
+                        {p.is_published ? 'Unpublish' : 'Publish'}
+                      </button>
+                    </form>
+                    <form action={deleteProduct}>
+                      <input type="hidden" name="id" value={p.id} />
+                      <button
+                        type="submit"
+                        style={{
+                          border: 'none',
+                          background: 'transparent',
+                          color: color.danger,
+                          cursor: 'pointer',
+                          fontSize: fontSize.sm,
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </main>
   );
 }
