@@ -1,7 +1,10 @@
 # Alta Universe — MVP Scope
 
-> Status: Draft 1 (architecture & planning phase)
-> Last updated: 2026-06-18
+> Status: Implemented — all MVP capabilities are built and the definition of done
+> is met at the code level (see §8). Remaining gates are operational, not code:
+> live Supabase Auth config (Site URL/redirect/email) and granting the first
+> admin role. Source of truth for schema is `supabase/migrations/`.
+> Last updated: 2026-06-19
 
 This document is the authoritative list of what is **in** and **out** of the
 first shippable version of Alta Universe. Anything not listed here is out of
@@ -98,5 +101,21 @@ The MVP is "done" when:
 6. RLS is verified on every user table (see `../database/RLS_STRATEGY.md`).
 7. Admin can manage content/catalogue but cannot read any private entry.
 8. Accessibility and responsive baselines pass (see design handoff).
+
+### Status (2026-06-19) — met at code level
+
+| #   | Criterion                           | Evidence                                                                              |
+| --- | ----------------------------------- | ------------------------------------------------------------------------------------- |
+| 1   | Sign-up / onboard / prefs / consent | `apps/web` auth, `onboarding`, `account/privacy`; `user_preferences`, `user_consents` |
+| 2   | Core capture in each domain         | mind check-in/journal, wear wardrobe/usage, lab cabinet/observations (web + mobile)   |
+| 3   | Cross-domain Alta Home              | `apps/web/app/(app)/home`                                                             |
+| 4   | Cost-per-wear & routine cost        | `packages/domain/cost.ts` (unit-tested); used in wear/lab                             |
+| 5   | Export & delete                     | Edge fns `export-user-data` / `delete-account`; grace-period purge (0011)             |
+| 6   | RLS on every user table             | pgTAP `rls.test.sql` + schema-wide `rls_coverage.test.sql`                            |
+| 7   | Admin manages content, not private  | `apps/admin`; tests "admin cannot read private journal/skin logs"                     |
+| 8   | A11y & responsive baseline          | focus-visible, reduced-motion, AA contrast (tested), headings, semantic tables        |
+
+Operational gates that remain (not code): live Auth URL/email configuration and
+granting the first admin role; a live end-to-end pass once real accounts exist.
 
 > Phased acceptance criteria live in `../../IMPLEMENTATION_ROADMAP.md`.

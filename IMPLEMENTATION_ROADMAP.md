@@ -10,25 +10,27 @@ verifiable value and de-risks the next.
 
 ## Delivery status at a glance
 
-Schema/RLS, server logic, web UI, Edge Functions, and mobile capture are built
-and the database migrations (0001–0011) are applied to the live project. The
-remaining work is operator/account configuration the maintainer must complete
-(Supabase Auth URL + email provider, granting the first admin role) and a live
-end-to-end pass once real accounts exist.
+Schema/RLS, server logic, web UI, Edge Functions, and mobile capture are built.
+Migrations 0001–0012 are applied to the live project; 0013 (FK indexes) and 0014
+(AltaLab ingredients) are committed and were applied via the SQL Editor pending a
+Supabase reconnect to re-verify. The remaining work is operator/account
+configuration the maintainer must complete (Supabase Auth URL + email provider,
+granting the first admin role) and a live end-to-end pass once real accounts
+exist.
 
-| Phase | Area                                  | Status                                  |
-| ----- | ------------------------------------- | --------------------------------------- |
-| 0     | Foundations (repo, tooling, CI)       | ✅ Built                                |
-| 1     | Alta Core: identity, profile, consent | ✅ Built · ⏳ Auth config pending       |
-| 2     | AltaMind capture (web + mobile)       | ✅ Built                                |
-| 3     | Alta Home + notifications             | ✅ Built                                |
-| 4     | AltaMind completion                   | ✅ Built                                |
-| 5     | AltaWear MVP                          | ✅ Built                                |
-| 6     | AltaLab MVP                           | ✅ Built                                |
-| 7     | Privacy operations: export & deletion | ✅ Built (grace-period purge live)      |
-| 8     | Admin console                         | ✅ Built · ⏳ first admin grant pending |
-| 9     | Public website                        | ✅ Built                                |
-| 10    | Hardening & MVP readiness             | ⏳ In progress                          |
+| Phase | Area                                  | Status                                     |
+| ----- | ------------------------------------- | ------------------------------------------ |
+| 0     | Foundations (repo, tooling, CI)       | ✅ Built                                   |
+| 1     | Alta Core: identity, profile, consent | ✅ Built · ⏳ Auth config pending          |
+| 2     | AltaMind capture (web + mobile)       | ✅ Built                                   |
+| 3     | Alta Home + notifications             | ✅ Built                                   |
+| 4     | AltaMind completion                   | ✅ Built                                   |
+| 5     | AltaWear MVP                          | ✅ Built                                   |
+| 6     | AltaLab MVP                           | ✅ Built                                   |
+| 7     | Privacy operations: export & deletion | ✅ Built (grace-period purge live)         |
+| 8     | Admin console                         | ✅ Built · ⏳ first admin grant pending    |
+| 9     | Public website                        | ✅ Built                                   |
+| 10    | Hardening & MVP readiness             | ✅ Built · ⏳ live advisors + launch gates |
 
 Legend: ✅ implemented & tested in repo · ⏳ needs live config or a final pass.
 
@@ -258,10 +260,21 @@ analytics — with no private data access.
 
 **Acceptance criteria**
 
-- [ ] Every user table has passing RLS tests.
-- [ ] WCAG 2.1 AA baseline met on primary flows.
-- [ ] MVP "definition of done" in `docs/product/MVP_SCOPE.md` fully satisfied.
-- [ ] No production deployment without explicit human approval.
+- [x] Every user table has passing RLS tests. _(per-table `rls.test.sql` +
+      schema-wide `rls_coverage.test.sql`; 73 DB tests.)_
+- [x] WCAG 2.1 AA baseline met on primary flows. _(focus-visible, reduced-motion,
+      AA contrast with regression tests, heading structure, semantic tables,
+      labelled inputs, live regions.)_
+- [x] MVP "definition of done" in `docs/product/MVP_SCOPE.md` fully satisfied
+      at the code level. _(See the DoD status table there; remaining gates are
+      operational — live Auth config + first admin grant.)_
+- [x] No production deployment without explicit human approval. _(No automated
+      prod deploy exists; schema changes applied only on explicit request.)_
+
+Remaining before external launch (operational, owner-driven): rotate any exposed
+credentials, configure Supabase Auth URL/email, grant the first admin role, then
+a live end-to-end pass. Performance: FK-index pass shipped (0013); full live
+advisor run pending Supabase reconnect.
 
 ---
 
