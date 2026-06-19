@@ -67,6 +67,9 @@ export default async function AdminLayout({ children }: { children: ReactNode })
           <Link href="/catalogue" style={{ color: color.textMuted, textDecoration: 'none' }}>
             Catalogue
           </Link>
+          <Link href="/ingredients" style={{ color: color.textMuted, textDecoration: 'none' }}>
+            Ingredients
+          </Link>
         </nav>
         <form action={signOut}>
           <button
