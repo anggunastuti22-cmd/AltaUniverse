@@ -1,7 +1,9 @@
 # Alta Universe — Privacy & Security
 
-> Status: Draft 1 (architecture & planning phase)
-> Last updated: 2026-06-18
+> Status: Implemented (MVP). The audit log ships as the `audit_events` table
+> (the doc's `ops_audit_log`); export/deletion run via the `export-user-data`
+> and `delete-account` Edge Functions, with grace-period purge (migration 0011).
+> Last updated: 2026-06-19
 
 Privacy is a product feature, not a compliance afterthought. This document is
 the authoritative statement of how Alta Universe protects users.

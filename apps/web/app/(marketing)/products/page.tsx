@@ -50,7 +50,9 @@ export default async function ProductsPage() {
                 backgroundColor: color.surface,
               }}
             >
-              <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600, color: color.text }}>
+              <h2
+                style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600, color: color.text }}
+              >
                 {p.name}
               </h2>
               <div style={{ color: color.textMuted, fontSize: fontSize.xs }}>

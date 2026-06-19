@@ -90,7 +90,9 @@ export default async function ExperimentsPage({
           (experiments ?? []).map((e) => (
             <article key={e.id} style={card}>
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: space.sm }}>
-                <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600, color: color.text }}>
+                <h2
+                  style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600, color: color.text }}
+                >
                   {e.hypothesis}
                 </h2>
                 <span style={{ ...muted, fontSize: fontSize.xs, textTransform: 'capitalize' }}>

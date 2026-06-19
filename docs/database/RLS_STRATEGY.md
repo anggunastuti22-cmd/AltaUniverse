@@ -1,7 +1,11 @@
 # Alta Universe — Row Level Security (RLS) Strategy
 
-> Status: Draft 1 (architecture & planning phase)
-> Last updated: 2026-06-18
+> Status: Implemented (MVP) — policies ship in `supabase/migrations/` (0001–0013)
+> and are verified by pgTAP (`supabase/tests/`, incl. a schema-wide RLS coverage
+> test). Conceptual table names below map to live names per the table in
+> `INITIAL_DATA_MODEL.md` (e.g. `ops_audit_log`→`audit_events`, private
+> `core_*`→`profiles`/`user_*`, `ops_products`→`lab_products`).
+> Last updated: 2026-06-19
 
 RLS is **mandatory** on every user-exposed table. This document defines the
 default policies, role model, and verification approach. Policies ship as part

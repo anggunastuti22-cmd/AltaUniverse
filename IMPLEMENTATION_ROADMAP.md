@@ -32,6 +32,11 @@ end-to-end pass once real accounts exist.
 
 Legend: ✅ implemented & tested in repo · ⏳ needs live config or a final pass.
 
+> Note: phase scopes below use the original conceptual table names (`core_*`,
+> `ops_*`). For how these map to the live tables (e.g. `core_profiles`→
+> `profiles`, `ops_audit_log`→`audit_events`, and which were deferred), see the
+> naming map in `docs/database/INITIAL_DATA_MODEL.md`.
+
 ---
 
 ## Phase 0 — Foundations (repo, tooling, CI)

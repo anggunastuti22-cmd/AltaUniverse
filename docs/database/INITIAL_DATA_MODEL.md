@@ -1,12 +1,38 @@
 # Alta Universe — Initial Data Model
 
-> Status: Draft 1 (architecture & planning phase)
-> Last updated: 2026-06-18
+> Status: Implemented (MVP) — this conceptual model has been built; see the
+> naming map below. Source of truth is `supabase/migrations/` (0001–0013).
+> Last updated: 2026-06-19
 
-This is a **conceptual** data model for the MVP. It defines tables, purpose, key
+This is the **conceptual** data model for the MVP. It defines tables, purpose, key
 columns, foreign keys, public/private classification, RLS requirements,
 retention considerations, and which app surfaces use each table. It is not the
 migration itself; migrations are authored in `supabase/migrations/` per ADR-002.
+
+## Implementation status & naming map
+
+The MVP schema is implemented. During implementation some conceptual names were
+shortened and a few conceptual tables were deferred. The **migrations are
+authoritative**; the headings below use the original conceptual names, which map
+to the live tables as follows:
+
+| Conceptual name          | Implemented as      | Notes                                              |
+| ------------------------ | ------------------- | -------------------------------------------------- |
+| `core_profiles`          | `profiles`          | PK = `auth.users.id`                               |
+| `core_preferences`       | `user_preferences`  |                                                    |
+| `core_consents`          | `user_consents`     | one row per `(user_id, consent_type)`              |
+| `core_notifications`     | `notifications`     |                                                    |
+| `core_deletion_requests` | `deletion_requests` | grace-period purge (migration 0011)                |
+| `core_data_exports`      | _(no table)_        | export runs on demand via `export-user-data` fn    |
+| `ops_audit_log`          | `audit_events`      | append-only; RLS deny-all, service-role writes     |
+| `ops_products`           | `lab_products`      | AltaLab catalogue (public-readable when published) |
+| `ops_articles`           | _deferred_          | educational articles not in MVP                    |
+| `ops_affiliate_links`    | _deferred_          | not in MVP                                         |
+| `ops_programs`           | _deferred_          | not in MVP                                         |
+
+Also implemented (not separately named above): `user_roles` (operator/admin
+RBAC), `media_assets` (content/image asset registry), and the per-domain
+`mind_*`, `wear_*`, `lab_*` tables as named in the migrations.
 
 ## Conventions
 
