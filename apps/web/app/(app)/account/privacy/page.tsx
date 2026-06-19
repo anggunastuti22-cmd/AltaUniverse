@@ -3,6 +3,7 @@ import { Button } from '@alta/ui';
 import { color, space } from '@alta/design-tokens';
 import type { ConsentType } from '@alta/validation';
 import { createClient } from '@/lib/supabase/server';
+import { PrivacyDataActions } from '@/components/privacy-data-actions';
 import { setConsent } from './actions';
 
 const CONSENTS: { type: ConsentType; label: string; description: string }[] = [
@@ -86,6 +87,8 @@ export default async function PrivacyPage() {
           );
         })}
       </ul>
+
+      <PrivacyDataActions />
     </main>
   );
 }

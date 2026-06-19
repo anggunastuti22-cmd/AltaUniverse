@@ -19,6 +19,7 @@ export default tseslint.config(
       '**/.expo/**',
       'apps/mobile/assets/**',
       '**/*.gen.ts',
+      'supabase/functions/**',
     ],
   },
   js.configs.recommended,
