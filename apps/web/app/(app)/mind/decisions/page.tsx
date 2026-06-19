@@ -111,11 +111,15 @@ export default async function DecisionsPage({
             return (
               <article key={d.id} style={card}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: space.sm }}>
-                  <strong
-                    style={{ fontFamily: 'var(--alta-font-family-display)', fontSize: fontSize.lg }}
+                  <h2
+                    style={{
+                      margin: 0,
+                      fontFamily: 'var(--alta-font-family-display)',
+                      fontSize: fontSize.lg,
+                    }}
                   >
                     {d.title}
-                  </strong>
+                  </h2>
                   <span style={{ ...muted, fontSize: fontSize.xs, textTransform: 'capitalize' }}>
                     {d.status}
                   </span>

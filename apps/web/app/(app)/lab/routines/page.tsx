@@ -49,7 +49,7 @@ export default async function RoutinesPage({
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: space.md }}>
         <form action={createRoutine} style={{ ...card, display: 'grid', gap: space.md }}>
-          <strong>New routine</strong>
+          <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600 }}>New routine</h2>
           <div>
             <label style={labelStyle} htmlFor="time_of_day">
               Time of day
@@ -78,7 +78,7 @@ export default async function RoutinesPage({
         </form>
 
         <form action={addRoutineStep} style={{ ...card, display: 'grid', gap: space.md }}>
-          <strong>Add a step</strong>
+          <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600 }}>Add a step</h2>
           <div>
             <label style={labelStyle} htmlFor="routine_id">
               Routine
@@ -165,11 +165,15 @@ export default async function RoutinesPage({
             return (
               <div key={r.id} style={{ ...card, borderLeft: `3px solid ${color.lab}` }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: space.sm }}>
-                  <strong
-                    style={{ fontFamily: 'var(--alta-font-family-display)', fontSize: fontSize.lg }}
+                  <h2
+                    style={{
+                      margin: 0,
+                      fontFamily: 'var(--alta-font-family-display)',
+                      fontSize: fontSize.lg,
+                    }}
                   >
                     {r.time_of_day.toUpperCase()} · {r.name}
-                  </strong>
+                  </h2>
                   <span style={{ ...muted, fontSize: fontSize.sm }}>
                     {formatMoney(cost, currency)}/use
                   </span>

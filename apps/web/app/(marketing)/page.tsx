@@ -103,15 +103,16 @@ export default function MarketingHome() {
               display: 'block',
             }}
           >
-            <strong
+            <h2
               style={{
+                margin: 0,
                 fontFamily: 'var(--alta-font-family-display)',
                 fontSize: fontSize.xl,
                 color: color.textStrong,
               }}
             >
               {d.name}
-            </strong>
+            </h2>
             <div style={{ color: d.accent, fontStyle: 'italic', margin: `${space.xs}px 0` }}>
               {d.tagline}
             </div>

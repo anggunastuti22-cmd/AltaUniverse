@@ -47,7 +47,7 @@ export default async function OutfitsPage({
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: space.md }}>
         <form action={createOutfit} style={{ ...card, display: 'grid', gap: space.md }}>
-          <strong>New outfit</strong>
+          <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600 }}>New outfit</h2>
           <div>
             <label style={labelStyle} htmlFor="name">
               Name
@@ -66,7 +66,9 @@ export default async function OutfitsPage({
         </form>
 
         <form action={addOutfitItem} style={{ ...card, display: 'grid', gap: space.md }}>
-          <strong>Add a piece to an outfit</strong>
+          <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600 }}>
+            Add a piece to an outfit
+          </h2>
           <div>
             <label style={labelStyle} htmlFor="outfit_id">
               Outfit
@@ -109,11 +111,15 @@ export default async function OutfitsPage({
         ) : (
           (outfits ?? []).map((o) => (
             <div key={o.id} style={{ ...card, borderLeft: `3px solid ${color.wear}` }}>
-              <strong
-                style={{ fontFamily: 'var(--alta-font-family-display)', fontSize: fontSize.lg }}
+              <h2
+                style={{
+                  margin: 0,
+                  fontFamily: 'var(--alta-font-family-display)',
+                  fontSize: fontSize.lg,
+                }}
               >
                 {o.name}
-              </strong>
+              </h2>
               {o.occasion ? (
                 <span style={{ ...muted, fontSize: fontSize.xs }}> · {o.occasion}</span>
               ) : null}

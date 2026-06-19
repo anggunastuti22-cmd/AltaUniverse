@@ -100,7 +100,17 @@ export default async function NotificationsPage() {
             >
               <div>
                 {!n.read_at ? <VisuallyHidden>Unread: </VisuallyHidden> : null}
-                <strong style={{ color: color.text }}>{n.title}</strong>
+                <h2
+                  style={{
+                    display: 'inline',
+                    margin: 0,
+                    fontSize: fontSize.base,
+                    fontWeight: 600,
+                    color: color.text,
+                  }}
+                >
+                  {n.title}
+                </h2>
                 <span
                   style={{ color: color.textSubtle, fontSize: fontSize.xs, marginLeft: space.sm }}
                 >

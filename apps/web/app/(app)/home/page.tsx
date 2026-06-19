@@ -52,9 +52,11 @@ function DomainCard({
       }}
     >
       <span style={{ ...eyebrow, color: accent }}>{label}</span>
-      <strong style={{ fontSize: fontSize.lg, fontFamily: 'var(--alta-font-family-display)' }}>
+      <h2
+        style={{ margin: 0, fontSize: fontSize.lg, fontFamily: 'var(--alta-font-family-display)' }}
+      >
         {title}
-      </strong>
+      </h2>
       <p style={{ color: color.textMuted, margin: 0, flex: 1 }}>{body}</p>
       <Link
         href={href}

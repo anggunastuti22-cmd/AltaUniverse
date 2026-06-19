@@ -67,11 +67,15 @@ export default async function DomainsPage({
         ) : (
           (domains ?? []).map((d) => (
             <div key={d.id} style={{ ...card, borderLeft: `3px solid ${color.mind}` }}>
-              <strong
-                style={{ fontFamily: 'var(--alta-font-family-display)', fontSize: fontSize.lg }}
+              <h2
+                style={{
+                  margin: 0,
+                  fontFamily: 'var(--alta-font-family-display)',
+                  fontSize: fontSize.lg,
+                }}
               >
                 {d.name}
-              </strong>
+              </h2>
               {d.description ? (
                 <p style={{ ...muted, margin: `${space.xs}px 0 0` }}>{d.description}</p>
               ) : null}

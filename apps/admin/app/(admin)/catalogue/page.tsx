@@ -47,7 +47,7 @@ export default async function CataloguePage({
         action={createProduct}
         style={{ ...cardStyle, display: 'grid', gap: space.md, marginBottom: space.xl }}
       >
-        <strong>Add product</strong>
+        <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600 }}>Add product</h2>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: space.md }}>
           <div>
             <label style={label} htmlFor="name">
@@ -109,7 +109,17 @@ export default async function CataloguePage({
               style={{ ...cardStyle, display: 'flex', alignItems: 'center', gap: space.md }}
             >
               <div style={{ flex: 1 }}>
-                <strong style={{ color: color.text }}>{p.name}</strong>
+                <h2
+                  style={{
+                    display: 'inline',
+                    margin: 0,
+                    fontSize: fontSize.base,
+                    fontWeight: 600,
+                    color: color.text,
+                  }}
+                >
+                  {p.name}
+                </h2>
                 <span
                   style={{ color: color.textMuted, fontSize: fontSize.xs, marginLeft: space.sm }}
                 >

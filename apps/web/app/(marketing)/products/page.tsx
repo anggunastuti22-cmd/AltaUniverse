@@ -50,7 +50,9 @@ export default async function ProductsPage() {
                 backgroundColor: color.surface,
               }}
             >
-              <strong style={{ color: color.text }}>{p.name}</strong>
+              <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600, color: color.text }}>
+                {p.name}
+              </h2>
               <div style={{ color: color.textMuted, fontSize: fontSize.xs }}>
                 {p.brand ? `${p.brand} · ` : ''}
                 {p.category}

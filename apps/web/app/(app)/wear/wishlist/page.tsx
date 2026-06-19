@@ -89,7 +89,9 @@ export default async function WishlistPage({
           (rows ?? []).map((w) => (
             <div key={w.id} style={card}>
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: space.sm }}>
-                <strong style={{ color: color.text }}>{w.name}</strong>
+                <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600, color: color.text }}>
+                  {w.name}
+                </h2>
                 <span style={{ ...muted, fontSize: fontSize.xs, textTransform: 'capitalize' }}>
                   {w.status}
                 </span>

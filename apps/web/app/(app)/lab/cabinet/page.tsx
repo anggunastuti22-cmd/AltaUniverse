@@ -186,7 +186,17 @@ export default async function CabinetPage({
             const overlapping = p.function ? (byFunction.get(p.function) ?? 0) > 1 : false;
             return (
               <div key={p.id} style={{ ...card, borderLeft: `3px solid ${color.lab}` }}>
-                <strong style={{ display: 'block', color: color.text }}>{p.custom_name}</strong>
+                <h2
+                  style={{
+                    margin: 0,
+                    display: 'block',
+                    fontSize: fontSize.base,
+                    fontWeight: 600,
+                    color: color.text,
+                  }}
+                >
+                  {p.custom_name}
+                </h2>
                 <span style={{ ...muted, fontSize: fontSize.xs, textTransform: 'capitalize' }}>
                   {p.brand ? `${p.brand} · ` : ''}
                   {p.function ?? 'unset'}
