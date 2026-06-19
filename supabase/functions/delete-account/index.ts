@@ -1,12 +1,15 @@
 // Edge Function: delete-account
-// Permanently deletes the calling user's account. Deleting the auth.users row
-// cascades all owned data (every user_id FK is ON DELETE CASCADE); audit_events
-// is retained with the actor reference nulled (ON DELETE SET NULL).
+// Schedules account deletion with a grace period (default 7 days) instead of
+// deleting immediately. Records a pending deletion_requests row; the user can
+// cancel before purge_after. A scheduled job (purge_due_deletions) performs the
+// actual delete, which cascades all owned data; audit_events is retained.
 //
 // The user is identified from their JWT (verify_jwt enabled); the service role
-// performs the privileged delete and writes the audit row.
+// records the request and writes the audit row.
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts';
 import { createClient } from 'jsr:@supabase/supabase-js@2';
+
+const GRACE_DAYS = 7;
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -32,19 +35,28 @@ Deno.serve(async (req: Request) => {
   } = await userClient.auth.getUser();
   if (!user) return json({ error: 'Unauthorized' }, 401);
 
+  const purgeAfter = new Date(Date.now() + GRACE_DAYS * 24 * 3600 * 1000).toISOString();
   const admin = createClient(url, serviceKey);
 
-  // Audit before deletion (actor_user_id is nulled by FK after the delete).
+  const { error } = await admin.from('deletion_requests').upsert(
+    {
+      user_id: user.id,
+      status: 'pending',
+      requested_at: new Date().toISOString(),
+      purge_after: purgeAfter,
+    },
+    { onConflict: 'user_id' },
+  );
+  if (error) return json({ error: error.message }, 500);
+
   await admin.from('audit_events').insert({
     actor_user_id: user.id,
     actor_role: 'authenticated',
-    action: 'account.delete',
+    action: 'account.delete_requested',
     target_table: 'auth.users',
     target_id: user.id,
+    metadata: { purge_after: purgeAfter },
   });
 
-  const { error } = await admin.auth.admin.deleteUser(user.id);
-  if (error) return json({ error: error.message }, 500);
-
-  return json({ ok: true });
+  return json({ ok: true, scheduled_for: purgeAfter });
 });

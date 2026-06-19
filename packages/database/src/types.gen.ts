@@ -39,6 +39,30 @@ export interface Database {
         };
         Relationships: [];
       };
+      deletion_requests: {
+        Row: {
+          user_id: string;
+          status: "pending" | "cancelled" | "completed";
+          requested_at: string;
+          purge_after: string;
+          updated_at: string;
+        };
+        Insert: {
+          user_id: string;
+          status?: "pending" | "cancelled" | "completed";
+          requested_at?: string;
+          purge_after: string;
+          updated_at?: string;
+        };
+        Update: {
+          user_id?: string;
+          status?: "pending" | "cancelled" | "completed";
+          requested_at?: string;
+          purge_after?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       lab_experiments: {
         Row: {
           id: string;
@@ -934,6 +958,7 @@ export interface Database {
       app_role: "admin";
       consent_type: "ai_processing" | "analytics" | "notifications";
       decision_status: "open" | "resolved" | "archived";
+      deletion_status: "pending" | "cancelled" | "completed";
       experiment_status: "planned" | "active" | "concluded" | "abandoned";
       goal_status: "active" | "paused" | "achieved" | "dropped";
       measurement_units: "metric" | "imperial";

@@ -38,6 +38,13 @@ export default async function PrivacyPage() {
 
   const granted = new Map<string, boolean>((rows ?? []).map((r) => [r.consent_type, r.granted]));
 
+  const { data: deletion } = await supabase
+    .from('deletion_requests')
+    .select('purge_after')
+    .eq('user_id', user.id)
+    .eq('status', 'pending')
+    .maybeSingle();
+
   return (
     <main style={{ maxWidth: 640, margin: '0 auto', padding: space.xl }}>
       <h1>Privacy &amp; consent centre</h1>
@@ -88,7 +95,7 @@ export default async function PrivacyPage() {
         })}
       </ul>
 
-      <PrivacyDataActions />
+      <PrivacyDataActions pendingDeletionUntil={deletion?.purge_after ?? null} />
     </main>
   );
 }

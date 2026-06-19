@@ -29,3 +29,17 @@ export async function setConsent(formData: FormData): Promise<void> {
 
   revalidatePath('/account/privacy');
 }
+
+export async function cancelDeletion(): Promise<void> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect('/login');
+  await supabase
+    .from('deletion_requests')
+    .update({ status: 'cancelled' })
+    .eq('user_id', user.id)
+    .eq('status', 'pending');
+  revalidatePath('/account/privacy');
+}

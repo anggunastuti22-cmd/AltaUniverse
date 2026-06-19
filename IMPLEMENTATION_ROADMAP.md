@@ -1,12 +1,36 @@
 # Alta Universe — Implementation Roadmap
 
-> Status: Draft 1 (architecture & planning phase)
-> Last updated: 2026-06-18
+> Status: MVP build in progress
+> Last updated: 2026-06-19
 
 This roadmap divides the build into **independently testable phases**, each with
 explicit acceptance criteria. No production deployment happens without explicit
 human approval (see `CLAUDE.md`). Phases are sequenced so each delivers
 verifiable value and de-risks the next.
+
+## Delivery status at a glance
+
+Schema/RLS, server logic, web UI, Edge Functions, and mobile capture are built
+and the database migrations (0001–0011) are applied to the live project. The
+remaining work is operator/account configuration the maintainer must complete
+(Supabase Auth URL + email provider, granting the first admin role) and a live
+end-to-end pass once real accounts exist.
+
+| Phase | Area                                  | Status                                  |
+| ----- | ------------------------------------- | --------------------------------------- |
+| 0     | Foundations (repo, tooling, CI)       | ✅ Built                                |
+| 1     | Alta Core: identity, profile, consent | ✅ Built · ⏳ Auth config pending       |
+| 2     | AltaMind capture (web + mobile)       | ✅ Built                                |
+| 3     | Alta Home + notifications             | ✅ Built                                |
+| 4     | AltaMind completion                   | ✅ Built                                |
+| 5     | AltaWear MVP                          | ✅ Built                                |
+| 6     | AltaLab MVP                           | ✅ Built                                |
+| 7     | Privacy operations: export & deletion | ✅ Built (grace-period purge live)      |
+| 8     | Admin console                         | ✅ Built · ⏳ first admin grant pending |
+| 9     | Public website                        | ✅ Built                                |
+| 10    | Hardening & MVP readiness             | ⏳ In progress                          |
+
+Legend: ✅ implemented & tested in repo · ⏳ needs live config or a final pass.
 
 ---
 
