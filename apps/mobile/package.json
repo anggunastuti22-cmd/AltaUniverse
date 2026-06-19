@@ -13,12 +13,15 @@
     "@alta/config": "workspace:*",
     "@alta/database": "workspace:*",
     "@alta/design-tokens": "workspace:*",
+    "@alta/domain": "workspace:*",
     "@alta/ui": "workspace:*",
     "@alta/validation": "workspace:*",
+    "@react-native-async-storage/async-storage": "2.2.0",
     "expo": "~56.0.12",
     "expo-status-bar": "~56.0.4",
     "react": "19.2.3",
     "react-native": "0.85.3",
+    "react-native-url-polyfill": "^2.0.0",
     "zod": "^3.24.0"
   },
   "devDependencies": {
