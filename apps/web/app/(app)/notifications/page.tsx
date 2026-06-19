@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { color, fontSize, radius, space } from '@alta/design-tokens';
+import { VisuallyHidden } from '@alta/ui';
 import { createClient } from '@/lib/supabase/server';
 import { CheckRemindersButton } from '@/components/check-reminders-button';
 import { deleteNotification, markAllRead, markRead } from './actions';
@@ -98,6 +99,7 @@ export default async function NotificationsPage() {
               }}
             >
               <div>
+                {!n.read_at ? <VisuallyHidden>Unread: </VisuallyHidden> : null}
                 <strong style={{ color: color.text }}>{n.title}</strong>
                 <span
                   style={{ color: color.textSubtle, fontSize: fontSize.xs, marginLeft: space.sm }}
@@ -118,7 +120,7 @@ export default async function NotificationsPage() {
                       style={{
                         border: 'none',
                         background: 'transparent',
-                        color: color.mind,
+                        color: color.mindText,
                         cursor: 'pointer',
                         fontSize: fontSize.sm,
                       }}

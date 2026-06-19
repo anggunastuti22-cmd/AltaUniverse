@@ -11,7 +11,7 @@ export default function MindLayout({ children }: { children: ReactNode }) {
             fontSize: 11,
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            color: color.mind,
+            color: color.mindText,
           }}
         >
           AltaMind · understand yourself

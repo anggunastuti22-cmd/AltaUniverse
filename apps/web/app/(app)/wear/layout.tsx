@@ -11,7 +11,7 @@ export default function WearLayout({ children }: { children: ReactNode }) {
             fontSize: 11,
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            color: color.wear,
+            color: color.wearText,
           }}
         >
           AltaWear · express yourself

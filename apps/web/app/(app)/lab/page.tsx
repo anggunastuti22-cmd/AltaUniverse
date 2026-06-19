@@ -72,7 +72,7 @@ export default async function LabOverview() {
             <Link
               href={t.href}
               style={{
-                color: color.lab,
+                color: color.labText,
                 fontWeight: 600,
                 fontSize: fontSize.sm,
                 marginTop: space.xs,

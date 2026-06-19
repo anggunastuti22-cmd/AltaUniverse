@@ -20,11 +20,11 @@ export const color = {
   border: '#e2dacb',
   borderStrong: '#cbc0ad',
 
-  // Ink & text
+  // Ink & text (all meet WCAG AA 4.5:1 on background/surface)
   text: '#2b261f',
   textStrong: '#1f1c17',
   textMuted: '#6c6457',
-  textSubtle: '#9a917f',
+  textSubtle: '#736b5b',
   textInverse: '#fcfaf5',
 
   // Brand / primary (ink)
@@ -32,22 +32,28 @@ export const color = {
   primaryHover: '#363029',
   primaryContrast: '#fcfaf5',
 
-  // Status
-  success: '#5e806a',
-  warning: '#b0895b',
-  danger: '#c9534b',
+  // Status (used primarily as text/signals — meet AA 4.5:1 on paper)
+  success: '#4c6a57',
+  warning: '#7e6038',
+  danger: '#b23a32',
 
   // Accessibility
   focusRing: '#8b7bb8',
 
-  // Domain accents + soft tints
+  // Domain accents + soft tints. The bright accent is for fills, hairlines,
+  // large display and tints; the `*Text` variant is the AA-compliant ink for
+  // small/normal text on paper (the bright accents fall below 4.5:1).
   core: '#b0895b',
+  coreText: '#7e6038',
   coreSoft: '#efe8d9',
   mind: '#8b7bb8',
+  mindText: '#6f5fa0',
   mindSoft: '#ece8f3',
   wear: '#c58b86',
+  wearText: '#9e5751',
   wearSoft: '#f4e7e3',
   lab: '#7fa088',
+  labText: '#566f5d',
   labSoft: '#e7efe8',
 } satisfies Record<string, string>;
 

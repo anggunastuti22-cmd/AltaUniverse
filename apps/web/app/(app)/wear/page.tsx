@@ -78,7 +78,7 @@ export default async function WearOverview() {
             <Link
               href={t.href}
               style={{
-                color: color.wear,
+                color: color.wearText,
                 fontWeight: 600,
                 fontSize: fontSize.sm,
                 marginTop: space.xs,

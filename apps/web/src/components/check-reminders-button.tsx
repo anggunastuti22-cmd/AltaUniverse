@@ -54,11 +54,14 @@ export function CheckRemindersButton() {
       >
         {busy ? 'Checking…' : 'Check for reminders'}
       </button>
-      {message ? (
-        <span role="status" style={{ color: color.textMuted, fontSize: fontSize.sm }}>
-          {message}
-        </span>
-      ) : null}
+      {/* Always mounted so assistive tech announces the result when it arrives. */}
+      <span
+        role="status"
+        aria-live="polite"
+        style={{ color: color.textMuted, fontSize: fontSize.sm }}
+      >
+        {message}
+      </span>
     </div>
   );
 }

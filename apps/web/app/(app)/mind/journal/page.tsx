@@ -89,7 +89,7 @@ export default async function JournalPage({
               <div style={{ display: 'flex', gap: space.sm, alignItems: 'baseline' }}>
                 <span style={{ ...muted, fontSize: fontSize.xs }}>{e.entry_date}</span>
                 {e.life_domain_id && domainName.get(e.life_domain_id) ? (
-                  <span style={{ fontSize: fontSize.xs, color: color.mind }}>
+                  <span style={{ fontSize: fontSize.xs, color: color.mindText }}>
                     · {domainName.get(e.life_domain_id)}
                   </span>
                 ) : null}

@@ -211,7 +211,7 @@ export default async function CabinetPage({
                       padding: `2px ${space.sm}px`,
                       borderRadius: radius.full,
                       backgroundColor: color.mindSoft,
-                      color: color.mind,
+                      color: color.mindText,
                       fontSize: fontSize.xs,
                     }}
                   >

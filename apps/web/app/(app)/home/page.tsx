@@ -115,7 +115,7 @@ export default async function AltaHome() {
       </h1>
       <p style={{ color: color.textMuted, marginTop: 0 }}>
         A calm start. Your three domains, one system —{' '}
-        <Link href="/mind" style={{ color: color.mind, fontWeight: fontWeight.semibold }}>
+        <Link href="/mind" style={{ color: color.mindText, fontWeight: fontWeight.semibold }}>
           weekly reset →
         </Link>
       </p>
@@ -198,7 +198,7 @@ export default async function AltaHome() {
             backgroundColor: color.mindSoft,
           }}
         >
-          <span style={{ ...eyebrow, color: color.mind }}>Gentle insight</span>
+          <span style={{ ...eyebrow, color: color.mindText }}>Gentle insight</span>
           <p style={{ color: color.text, margin: `${space.sm}px 0 ${space.xs}px` }}>
             You tend to feel steadier on the days you check in before noon.
           </p>

@@ -72,7 +72,7 @@ export function AppShell({
               height: 34,
               borderRadius: 999,
               backgroundColor: color.coreSoft,
-              color: color.core,
+              color: color.coreText,
               border: `1px solid ${color.border}`,
               display: 'inline-flex',
               alignItems: 'center',

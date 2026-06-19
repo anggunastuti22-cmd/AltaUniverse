@@ -11,7 +11,7 @@ export default function LabLayout({ children }: { children: ReactNode }) {
             fontSize: 11,
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            color: color.lab,
+            color: color.labText,
           }}
         >
           AltaLab · care for yourself

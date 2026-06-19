@@ -56,7 +56,7 @@ export default async function AdminDashboard() {
         ))}
       </div>
       <p style={{ marginTop: space.xl }}>
-        <Link href="/catalogue" style={{ color: color.lab, fontWeight: 600 }}>
+        <Link href="/catalogue" style={{ color: color.labText, fontWeight: 600 }}>
           Manage catalogue →
         </Link>
       </p>

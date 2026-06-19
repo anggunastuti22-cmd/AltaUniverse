@@ -18,7 +18,7 @@ export default async function ProductsPage() {
           fontSize: 11,
           letterSpacing: '0.12em',
           textTransform: 'uppercase',
-          color: color.lab,
+          color: color.labText,
         }}
       >
         AltaLab · catalogue

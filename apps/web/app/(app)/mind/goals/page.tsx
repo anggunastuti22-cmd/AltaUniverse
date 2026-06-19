@@ -84,7 +84,7 @@ export default async function GoalsPage({
                 </span>
               </div>
               {g.life_domain_id && domainName.get(g.life_domain_id) ? (
-                <span style={{ fontSize: fontSize.xs, color: color.mind }}>
+                <span style={{ fontSize: fontSize.xs, color: color.mindText }}>
                   {domainName.get(g.life_domain_id)}
                 </span>
               ) : null}

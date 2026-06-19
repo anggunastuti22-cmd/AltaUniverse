@@ -84,7 +84,7 @@ export default async function MindOverview() {
             <Link
               href={t.href}
               style={{
-                color: color.mind,
+                color: color.mindText,
                 fontWeight: 600,
                 fontSize: fontSize.sm,
                 marginTop: space.xs,
@@ -111,7 +111,7 @@ export default async function MindOverview() {
         </p>
         <Link
           href="/mind/decisions"
-          style={{ color: color.mind, fontWeight: 600, fontSize: fontSize.sm }}
+          style={{ color: color.mindText, fontWeight: 600, fontSize: fontSize.sm }}
         >
           Open decision room →
         </Link>

@@ -78,11 +78,10 @@ export function PrivacyDataActions({
     <section style={{ display: 'grid', gap: space.md, marginTop: space.xl }}>
       <h2 style={{ margin: 0 }}>Your data</h2>
 
-      {message ? (
-        <p role="status" aria-live="polite" style={{ color: color.textMuted }}>
-          {message}
-        </p>
-      ) : null}
+      {/* Always mounted so assistive tech registers the region before updates. */}
+      <p role="status" aria-live="polite" style={{ color: color.textMuted, margin: 0 }}>
+        {message}
+      </p>
 
       <div style={card}>
         <h3 style={{ margin: 0, fontSize: fontSize.base }}>Export your data</h3>
