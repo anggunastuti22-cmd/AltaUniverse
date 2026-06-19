@@ -76,7 +76,8 @@ select is(
 --    (so the public read is policy-gated, not an open grant).
 select is(
   (select count(*)::int
-   from (values ('lab_products'), ('media_assets')) as t(tbl)
+   from (values ('lab_products'), ('media_assets'), ('lab_ingredients'),
+                ('lab_product_ingredients'), ('lab_ingredient_pairings')) as t(tbl)
    join pg_class c on c.oid = to_regclass('public.' || t.tbl)
    where c.relrowsecurity = false),
   0, 'public-readable catalogue tables have RLS enabled');

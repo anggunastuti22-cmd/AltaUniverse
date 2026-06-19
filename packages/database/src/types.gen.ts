@@ -102,6 +102,96 @@ export interface Database {
         };
         Relationships: [];
       };
+      lab_ingredient_pairings: {
+        Row: {
+          id: string;
+          class_a: "retinoid" | "aha" | "bha" | "vitamin_c" | "niacinamide" | "benzoyl_peroxide" | "peptide" | "hydrator" | "ceramide" | "spf" | "antioxidant" | "exfoliant_physical" | "other";
+          class_b: "retinoid" | "aha" | "bha" | "vitamin_c" | "niacinamide" | "benzoyl_peroxide" | "peptide" | "hydrator" | "ceramide" | "spf" | "antioxidant" | "exfoliant_physical" | "other";
+          note: string;
+          source: string | null;
+          is_published: boolean;
+          created_by: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          class_a: "retinoid" | "aha" | "bha" | "vitamin_c" | "niacinamide" | "benzoyl_peroxide" | "peptide" | "hydrator" | "ceramide" | "spf" | "antioxidant" | "exfoliant_physical" | "other";
+          class_b: "retinoid" | "aha" | "bha" | "vitamin_c" | "niacinamide" | "benzoyl_peroxide" | "peptide" | "hydrator" | "ceramide" | "spf" | "antioxidant" | "exfoliant_physical" | "other";
+          note: string;
+          source?: string | null;
+          is_published?: boolean;
+          created_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          class_a?: "retinoid" | "aha" | "bha" | "vitamin_c" | "niacinamide" | "benzoyl_peroxide" | "peptide" | "hydrator" | "ceramide" | "spf" | "antioxidant" | "exfoliant_physical" | "other";
+          class_b?: "retinoid" | "aha" | "bha" | "vitamin_c" | "niacinamide" | "benzoyl_peroxide" | "peptide" | "hydrator" | "ceramide" | "spf" | "antioxidant" | "exfoliant_physical" | "other";
+          note?: string;
+          source?: string | null;
+          is_published?: boolean;
+          created_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      lab_ingredients: {
+        Row: {
+          id: string;
+          slug: string;
+          name: string;
+          inci_name: string | null;
+          class: "retinoid" | "aha" | "bha" | "vitamin_c" | "niacinamide" | "benzoyl_peroxide" | "peptide" | "hydrator" | "ceramide" | "spf" | "antioxidant" | "exfoliant_physical" | "other" | null;
+          summary: string | null;
+          is_published: boolean;
+          created_by: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          slug: string;
+          name: string;
+          inci_name?: string | null;
+          class?: "retinoid" | "aha" | "bha" | "vitamin_c" | "niacinamide" | "benzoyl_peroxide" | "peptide" | "hydrator" | "ceramide" | "spf" | "antioxidant" | "exfoliant_physical" | "other" | null;
+          summary?: string | null;
+          is_published?: boolean;
+          created_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          slug?: string;
+          name?: string;
+          inci_name?: string | null;
+          class?: "retinoid" | "aha" | "bha" | "vitamin_c" | "niacinamide" | "benzoyl_peroxide" | "peptide" | "hydrator" | "ceramide" | "spf" | "antioxidant" | "exfoliant_physical" | "other" | null;
+          summary?: string | null;
+          is_published?: boolean;
+          created_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      lab_product_ingredients: {
+        Row: {
+          product_id: string;
+          ingredient_id: string;
+        };
+        Insert: {
+          product_id: string;
+          ingredient_id: string;
+        };
+        Update: {
+          product_id?: string;
+          ingredient_id?: string;
+        };
+        Relationships: [];
+      };
       lab_products: {
         Row: {
           id: string;
@@ -961,6 +1051,7 @@ export interface Database {
       deletion_status: "pending" | "cancelled" | "completed";
       experiment_status: "planned" | "active" | "concluded" | "abandoned";
       goal_status: "active" | "paused" | "achieved" | "dropped";
+      ingredient_class: "retinoid" | "aha" | "bha" | "vitamin_c" | "niacinamide" | "benzoyl_peroxide" | "peptide" | "hydrator" | "ceramide" | "spf" | "antioxidant" | "exfoliant_physical" | "other";
       measurement_units: "metric" | "imperial";
       notification_type: "routine_reminder" | "weekly_review" | "system";
       primary_need: "rest" | "space" | "connection" | "focus" | "movement" | "comfort" | "direction";

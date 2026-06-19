@@ -38,8 +38,48 @@ on conflict (user_id, role) do nothing;
 insert into lab_products (id, name, brand, category, key_ingredients, is_published, created_by) values
   ('b0000000-0000-4000-8000-000000000001', 'Gentle Daily Cleanser', 'Fictia', 'cleanser', '{glycerin,ceramides}', true, 'a0000000-0000-4000-8000-000000000003'),
   ('b0000000-0000-4000-8000-000000000002', 'Calm Barrier Moisturizer', 'Fictia', 'moisturizer', '{niacinamide,squalane}', true, 'a0000000-0000-4000-8000-000000000003'),
-  ('b0000000-0000-4000-8000-000000000003', 'Draft Night Serum', 'Fictia', 'serum', '{retinal}', false, 'a0000000-0000-4000-8000-000000000003')
+  ('b0000000-0000-4000-8000-000000000003', 'Draft Night Serum', 'Fictia', 'serum', '{retinal}', false, 'a0000000-0000-4000-8000-000000000003'),
+  ('b0000000-0000-4000-8000-000000000004', 'Renewal Retinal Serum', 'Fictia', 'serum', '{retinal}', true, 'a0000000-0000-4000-8000-000000000003'),
+  ('b0000000-0000-4000-8000-000000000005', 'Smooth AHA Exfoliant', 'Fictia', 'exfoliant', '{glycolic acid}', true, 'a0000000-0000-4000-8000-000000000003')
 on conflict (id) do nothing;
+
+-- AltaLab ingredients (ADR-004): clickable entities + generic education. ------
+insert into lab_ingredients (id, slug, name, inci_name, class, summary, is_published, created_by) values
+  ('cafe0000-0000-4000-8000-000000000001', 'glycerin', 'Glycerin', 'Glycerin', 'hydrator',
+   'A humectant that helps skin hold water. Widely used and well tolerated.', true, 'a0000000-0000-4000-8000-000000000003'),
+  ('cafe0000-0000-4000-8000-000000000002', 'ceramides', 'Ceramides', 'Ceramide NP', 'ceramide',
+   'Lipids that support the skin barrier. Common in moisturisers.', true, 'a0000000-0000-4000-8000-000000000003'),
+  ('cafe0000-0000-4000-8000-000000000003', 'niacinamide', 'Niacinamide', 'Niacinamide', 'niacinamide',
+   'A form of vitamin B3 used in many barrier-support formulas.', true, 'a0000000-0000-4000-8000-000000000003'),
+  ('cafe0000-0000-4000-8000-000000000004', 'squalane', 'Squalane', 'Squalane', 'hydrator',
+   'A lightweight emollient that helps soften skin.', true, 'a0000000-0000-4000-8000-000000000003'),
+  ('cafe0000-0000-4000-8000-000000000005', 'retinal', 'Retinal', 'Retinaldehyde', 'retinoid',
+   'A retinoid (vitamin A derivative). Often introduced gradually.', true, 'a0000000-0000-4000-8000-000000000003'),
+  ('cafe0000-0000-4000-8000-000000000006', 'glycolic-acid', 'Glycolic acid', 'Glycolic Acid', 'aha',
+   'An alpha-hydroxy acid used for chemical exfoliation.', true, 'a0000000-0000-4000-8000-000000000003')
+on conflict (id) do nothing;
+
+insert into lab_product_ingredients (product_id, ingredient_id) values
+  ('b0000000-0000-4000-8000-000000000001', 'cafe0000-0000-4000-8000-000000000001'),
+  ('b0000000-0000-4000-8000-000000000001', 'cafe0000-0000-4000-8000-000000000002'),
+  ('b0000000-0000-4000-8000-000000000002', 'cafe0000-0000-4000-8000-000000000003'),
+  ('b0000000-0000-4000-8000-000000000002', 'cafe0000-0000-4000-8000-000000000004'),
+  ('b0000000-0000-4000-8000-000000000004', 'cafe0000-0000-4000-8000-000000000005'),
+  ('b0000000-0000-4000-8000-000000000005', 'cafe0000-0000-4000-8000-000000000006')
+on conflict do nothing;
+
+-- Generic, admin-curated educational pairing notes (canonical class order).
+insert into lab_ingredient_pairings (class_a, class_b, note, source, is_published) values
+  ('retinoid', 'aha',
+   'Retinoids and exfoliating acids are both active. Many people introduce them on alternate evenings while their skin adjusts. This is general education, not advice for your skin.',
+   NULL, true),
+  ('retinoid', 'benzoyl_peroxide',
+   'Some formulations of these are often applied at different times of day. General education only.',
+   NULL, true),
+  ('vitamin_c', 'niacinamide',
+   'A frequently discussed pairing; modern formulations are commonly used together. General education only.',
+   NULL, true)
+on conflict (class_a, class_b) do nothing;
 
 -- AltaMind (fictional, for Maya) --------------------------------------------
 insert into mind_life_domains (id, user_id, name, sort_order) values
@@ -86,15 +126,22 @@ insert into lab_skin_profiles (user_id, skin_type, concerns, sensitivities) valu
 on conflict (user_id) do nothing;
 
 insert into lab_user_products (id, user_id, product_id, opened_on, price_paid) values
-  ('f0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', 'b0000000-0000-4000-8000-000000000001', current_date - 30, 14.00)
+  ('f0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', 'b0000000-0000-4000-8000-000000000001', current_date - 30, 14.00),
+  -- Cabinet products that link to retinoid/AHA catalogue products, so the
+  -- evening routine demonstrates the (educational) pairing note end-to-end.
+  ('f0000000-0000-4000-8000-000000000002', 'a0000000-0000-4000-8000-000000000001', 'b0000000-0000-4000-8000-000000000004', current_date - 20, 28.00),
+  ('f0000000-0000-4000-8000-000000000003', 'a0000000-0000-4000-8000-000000000001', 'b0000000-0000-4000-8000-000000000005', current_date - 10, 22.00)
 on conflict (id) do nothing;
 
 insert into lab_routines (id, user_id, time_of_day, name) values
-  ('f1000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', 'am', 'Morning basics')
+  ('f1000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', 'am', 'Morning basics'),
+  ('f1000000-0000-4000-8000-000000000002', 'a0000000-0000-4000-8000-000000000001', 'pm', 'Evening renewal')
 on conflict (id) do nothing;
 
 insert into lab_routine_steps (user_id, routine_id, user_product_id, step_order, instruction) values
-  ('a0000000-0000-4000-8000-000000000001', 'f1000000-0000-4000-8000-000000000001', 'f0000000-0000-4000-8000-000000000001', 1, 'Cleanse gently')
+  ('a0000000-0000-4000-8000-000000000001', 'f1000000-0000-4000-8000-000000000001', 'f0000000-0000-4000-8000-000000000001', 1, 'Cleanse gently'),
+  ('a0000000-0000-4000-8000-000000000001', 'f1000000-0000-4000-8000-000000000002', 'f0000000-0000-4000-8000-000000000002', 1, 'Retinal serum'),
+  ('a0000000-0000-4000-8000-000000000001', 'f1000000-0000-4000-8000-000000000002', 'f0000000-0000-4000-8000-000000000003', 2, 'AHA exfoliant')
 on conflict (routine_id, step_order) do nothing;
 
 insert into lab_skin_logs (user_id, observed_on, note) values
