@@ -8,6 +8,7 @@ export interface NavItem {
   href: string;
   label: string;
   accent?: string;
+  badge?: number;
 }
 
 export function SidebarNav({ items }: { items: NavItem[] }) {
@@ -47,7 +48,27 @@ export function SidebarNav({ items }: { items: NavItem[] }) {
                 opacity: active ? 1 : 0.5,
               }}
             />
-            {item.label}
+            <span style={{ flex: 1 }}>{item.label}</span>
+            {item.badge && item.badge > 0 ? (
+              <span
+                aria-label={`${item.badge} unread`}
+                style={{
+                  minWidth: 18,
+                  height: 18,
+                  padding: '0 5px',
+                  borderRadius: 999,
+                  backgroundColor: color.mind,
+                  color: color.textInverse,
+                  fontSize: 11,
+                  fontWeight: 600,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                {item.badge}
+              </span>
+            ) : null}
           </Link>
         );
       })}

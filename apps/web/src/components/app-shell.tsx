@@ -3,20 +3,30 @@ import { color, fontSize, fontWeight, radius, space } from '@alta/design-tokens'
 import { signOut } from '../../app/login/actions';
 import { SidebarNav, type NavItem } from './sidebar-nav';
 
-const NAV: NavItem[] = [
-  { href: '/home', label: 'Alta Home', accent: color.core },
-  { href: '/mind', label: 'AltaMind', accent: color.mind },
-  { href: '/wear', label: 'AltaWear', accent: color.wear },
-  { href: '/lab', label: 'AltaLab', accent: color.lab },
-  { href: '/notifications', label: 'Notifications', accent: color.borderStrong },
-  { href: '/account/privacy', label: 'Account & Privacy', accent: color.borderStrong },
-];
+function buildNav(unread: number): NavItem[] {
+  return [
+    { href: '/home', label: 'Alta Home', accent: color.core },
+    { href: '/mind', label: 'AltaMind', accent: color.mind },
+    { href: '/wear', label: 'AltaWear', accent: color.wear },
+    { href: '/lab', label: 'AltaLab', accent: color.lab },
+    { href: '/notifications', label: 'Notifications', accent: color.borderStrong, badge: unread },
+    { href: '/account/privacy', label: 'Account & Privacy', accent: color.borderStrong },
+  ];
+}
 
 function initialOf(name: string): string {
   return name.trim().charAt(0).toUpperCase() || 'A';
 }
 
-export function AppShell({ displayName, children }: { displayName: string; children: ReactNode }) {
+export function AppShell({
+  displayName,
+  unread = 0,
+  children,
+}: {
+  displayName: string;
+  unread?: number;
+  children: ReactNode;
+}) {
   return (
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: color.background }}>
       <aside
@@ -80,7 +90,7 @@ export function AppShell({ displayName, children }: { displayName: string; child
           </div>
         </div>
 
-        <SidebarNav items={NAV} />
+        <SidebarNav items={buildNav(unread)} />
 
         <div style={{ marginTop: 'auto' }}>
           <div

@@ -18,5 +18,15 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
 
   if (!profile?.onboarded_at) redirect('/onboarding');
 
-  return <AppShell displayName={profile.display_name}>{children}</AppShell>;
+  const { count: unread } = await supabase
+    .from('notifications')
+    .select('*', { count: 'exact', head: true })
+    .eq('user_id', user.id)
+    .is('read_at', null);
+
+  return (
+    <AppShell displayName={profile.display_name} unread={unread ?? 0}>
+      {children}
+    </AppShell>
+  );
 }
