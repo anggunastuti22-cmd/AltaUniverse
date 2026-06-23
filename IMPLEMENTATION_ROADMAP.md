@@ -11,12 +11,12 @@ verifiable value and de-risks the next.
 ## Delivery status at a glance
 
 Schema/RLS, server logic, web UI, Edge Functions, and mobile capture are built.
-Migrations 0001–0012 are applied to the live project; 0013 (FK indexes) and 0014
-(AltaLab ingredients) are committed and were applied via the SQL Editor pending a
-Supabase reconnect to re-verify. The remaining work is operator/account
-configuration the maintainer must complete (Supabase Auth URL + email provider,
-granting the first admin role) and a live end-to-end pass once real accounts
-exist.
+Migrations 0001–0014 are applied to the live project (0013 FK indexes and 0014
+AltaLab ingredients verified live via SQL Editor checks: the three ingredient
+tables, both FK indexes, the `ingredient_class` enum, and RLS all present). The
+remaining work is operator/account configuration the maintainer must complete
+(Supabase Auth URL + email provider, granting the first admin role) and a live
+end-to-end pass once real accounts exist.
 
 | Phase | Area                                  | Status                                     |
 | ----- | ------------------------------------- | ------------------------------------------ |
