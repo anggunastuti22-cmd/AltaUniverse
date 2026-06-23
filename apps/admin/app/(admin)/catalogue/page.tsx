@@ -48,7 +48,13 @@ export default async function CataloguePage({
         style={{ ...cardStyle, display: 'grid', gap: space.md, marginBottom: space.xl }}
       >
         <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600 }}>Add product</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: space.md }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+            gap: space.md,
+          }}
+        >
           <div>
             <label style={label} htmlFor="name">
               Name

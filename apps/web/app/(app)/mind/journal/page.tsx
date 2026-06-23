@@ -52,7 +52,13 @@ export default async function JournalPage({
             style={{ ...field, resize: 'vertical' }}
           />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: space.md }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: space.md,
+          }}
+        >
           <div>
             <label style={labelStyle} htmlFor="life_domain_id">
               Life domain (optional)

@@ -66,7 +66,13 @@ export default async function IngredientsPage({
         style={{ ...cardStyle, display: 'grid', gap: space.md, marginBottom: space.xl }}
       >
         <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600 }}>Add ingredient</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: space.md }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: space.md,
+          }}
+        >
           <div>
             <label style={label} htmlFor="name">
               Name
@@ -80,7 +86,13 @@ export default async function IngredientsPage({
             <input id="slug" name="slug" required style={field} placeholder="niacinamide" />
           </div>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: space.md }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: space.md,
+          }}
+        >
           <div>
             <label style={label} htmlFor="inci_name">
               INCI name

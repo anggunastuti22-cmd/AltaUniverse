@@ -45,7 +45,13 @@ export default async function OutfitsPage({
         </p>
       ) : null}
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: space.md }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: space.md,
+        }}
+      >
         <form action={createOutfit} style={{ ...card, display: 'grid', gap: space.md }}>
           <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600 }}>New outfit</h2>
           <div>

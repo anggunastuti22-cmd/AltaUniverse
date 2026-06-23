@@ -59,7 +59,13 @@ export default async function DecisionsPage({
           </label>
           <textarea id="context" name="context" rows={2} style={{ ...field, resize: 'vertical' }} />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: space.md }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: space.md,
+          }}
+        >
           <div>
             <label style={labelStyle} htmlFor="options">
               Options (one per line)

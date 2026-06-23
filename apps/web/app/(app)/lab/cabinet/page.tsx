@@ -85,7 +85,13 @@ export default async function CabinetPage({
       <details style={{ ...card, marginBottom: space.lg }}>
         <summary style={{ cursor: 'pointer', fontWeight: 600 }}>+ Add product</summary>
         <form action={addProduct} style={{ display: 'grid', gap: space.md, marginTop: space.md }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: space.md }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: space.md,
+            }}
+          >
             <div>
               <label style={labelStyle} htmlFor="name">
                 Product name

@@ -57,7 +57,13 @@ export default async function ExperimentsPage({
             style={{ ...fieldStyle, resize: 'vertical' }}
           />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: space.md }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+            gap: space.md,
+          }}
+        >
           <div>
             <label style={labelStyle} htmlFor="user_product_id">
               Product (optional)

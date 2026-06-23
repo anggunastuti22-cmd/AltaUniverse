@@ -133,6 +133,8 @@ export default async function NotificationsPage() {
                         color: color.mindText,
                         cursor: 'pointer',
                         fontSize: fontSize.sm,
+                        minHeight: 24,
+                        padding: `${space.xs}px ${space.sm}px`,
                       }}
                     >
                       Read
@@ -150,6 +152,8 @@ export default async function NotificationsPage() {
                       color: color.textSubtle,
                       cursor: 'pointer',
                       fontSize: fontSize.sm,
+                      minHeight: 24,
+                      padding: `${space.xs}px ${space.sm}px`,
                     }}
                   >
                     Dismiss

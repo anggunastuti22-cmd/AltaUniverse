@@ -43,7 +43,13 @@ export default async function GoalsPage({
           </label>
           <input id="title" name="title" required maxLength={200} style={field} />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: space.md }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: space.md,
+          }}
+        >
           <div>
             <label style={labelStyle} htmlFor="life_domain_id">
               Life domain (optional)

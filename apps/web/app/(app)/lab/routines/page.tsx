@@ -93,7 +93,13 @@ export default async function RoutinesPage({
         </p>
       ) : null}
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: space.md }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: space.md,
+        }}
+      >
         <form action={createRoutine} style={{ ...card, display: 'grid', gap: space.md }}>
           <h2 style={{ margin: 0, fontSize: fontSize.base, fontWeight: 600 }}>New routine</h2>
           <div>
@@ -140,7 +146,13 @@ export default async function RoutinesPage({
               ))}
             </select>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: space.sm }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+              gap: space.sm,
+            }}
+          >
             <div>
               <label style={labelStyle} htmlFor="user_product_id">
                 Product

@@ -39,7 +39,13 @@ export default async function UsagePage({
       ) : null}
 
       <form action={logUsage} style={{ ...card, display: 'grid', gap: space.md }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: space.md }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: space.md,
+          }}
+        >
           <div>
             <label style={labelStyle} htmlFor="item_id">
               Item worn
